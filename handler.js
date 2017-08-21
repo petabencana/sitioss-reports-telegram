@@ -84,7 +84,7 @@ module.exports.webhook = (event, context, callback) => {
         console.log('Fetched card id: ' + body.cardId);
         //Construct the text message to be sent to the user
         var messageText = replies[process.env.DEFAULT_LANG];
-        messageText += "\n" + process.env.CARD_PATH + event.message.text + "/" + body.cardId + "/report";
+        messageText += "\n" + process.env.CARD_PATH + event.message.text + "/" + body.cardId;
         callSendAPI(messageText, chatID);
         var response = {
             statusCode: 200,
