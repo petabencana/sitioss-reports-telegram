@@ -1,4 +1,11 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+
 # cognicity-reports-telegram-lambda
+
+## Telegram Bot
+Allows Telegram users to submit flood reports via text message chat bot.
+Part of the CogniCity platform, deployed for [Urban Risk Map](https://riskmap.us).
+
 This module deploys serverless lambdas that, after user initiates a conversation via Telegram app, fetch a report card from the server and sends it to them
 
 ### Install
