@@ -27,8 +27,8 @@ const instance_regions = {
 // Welcome message to user
 const initiate = {
  'en': 'Welcome! Type in /flood to request a card link',
- 'id': 'Selamat datang! ketik /banjir untuk meminta link kartu'
-}
+ 'id': 'Selamat datang! ketik /banjir untuk meminta link kartu.'
+};
 
 // Replies to user
 const replies = {
