@@ -1,3 +1,6 @@
+import telegram from '../../lib/telegram/';
+import messages from '../../lib/telegram/messages';
+import cards from '../../lib/cards';
 
 // GRASP card
 const options = {
@@ -13,10 +16,11 @@ const options = {
 
 // GRASP operating regions
 const instance_regions = {
-  chn: 'chennai'
+  chn: 'chennai',
   jbd: 'jakarta',
   sby: 'surabaya',
-  bdg: 'bandung'
+  bdg: 'bandung',
+  srg: 'semarang'
 };
 
 
@@ -35,7 +39,8 @@ const replies = {
 // Confirmation message to user
 const confirmations = {
   'en': 'Hi! Thanks for your report. I\'ve put it on the map.',
-  'id': 'Hi! Terima kasih atas laporan Anda. Aku sudah menaruhnya di peta.'
+  'id': 'Hi! Terima kasih atas laporan Anda. Aku sudah menaruhnya di peta.',
+  'in': 'Hi! Terima kasih atas laporan Anda. Aku sudah menaruhnya di peta.'
 };
 
 /*

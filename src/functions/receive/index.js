@@ -14,6 +14,7 @@ const options = {
     'Content-Type': 'application/json'
   }
 };
+// TODO: add oauth, app, server clarification
 
 
 /**
