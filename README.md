@@ -6,7 +6,7 @@
 Allows Telegram users to submit flood reports via text message chat bot.
 Part of the CogniCity platform, deployed for [Urban Risk Map](https://riskmap.us).
 
-This module deploys serverless lambda that after user initiates a conversation via Telegram, sends a report link and a confirmation message.
+This module deploys serverless lambdas that, after user initiates a conversation via Telegram app, fetch a report card from the server and sends it to them
 
 ### Install
 `npm install`
@@ -30,11 +30,10 @@ Save a copy of sample.env as .env in local directory with appropriate credential
 * `BOT_TOKEN`: Access token created on creating a Telegram bot
 * `DEFAULT_LANG`: Current default language is English. You can add more languages here and parameterize replies for each language.
 * `CARD_PATH`: Front end's cards URL
-* `MAP_PATH`: Front end's map URL
+* `MAPSERVER`: Front end's map URL
 * `X_API_KEY`: API Key needed to make calls to the deployed server (Set it to "" during local testing)
 * `PG_CON`: Connection string for the Postgres database
 * `SERVER`: Cognicity server URL to fetch unique cardIds
-* `API_SERVER`: Location of the data server
 
 #### Misc Notes
 - AWS credentials are stored in bash_profile

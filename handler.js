@@ -41,7 +41,6 @@ const replies = {
 const confirmations = {
   'en': 'Hi! Thanks for your report. I\'ve put it on the map.',
   'id': 'Hi! Terima kasih atas laporan Anda. Aku sudah menaruhnya di peta.'
-  'in': 'Hi! Terima kasih atas laporan Anda. Aku sudah menaruhnya di peta.'
 };
 
 /*
@@ -122,7 +121,7 @@ module.exports.reply = (event, context, callback) => {
 
   //Construct the confirmation message to be sent to the user
   var messageText = confirmations[message.language];
-  messageText += '\n' + process.env.MAPSERVER + instance_regions[message.implementation_area] + '/' + message.report_id;
+  messageText += "\n" + process.env.MAPSERVER + instance_regions[message.implementation_area] + '/' + message.report_id;
 
   //Call Send API to confirmation message with report link to the user
   callSendAPI(messageText, message.username);
