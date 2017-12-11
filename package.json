@@ -1,8 +1,8 @@
 {
   "name": "cognicity-reports-telegram-lambda",
-  "version": "1.0.0",
-  "description": "A serverless Telegram chatbot which will send one time card links and report notifications",
-  "main": "handler.js",
+  "version": "0.0.2",
+  "description": "Telegram chatbot running on AWS lambda",
+  "main": "index.js",
   "scripts": {
     "lint": "eslint src",
     "mocha": "nyc mocha --compilers js:babel-core/register src/test/index",
@@ -12,7 +12,8 @@
   },
   "keywords": [
     "bot",
-    "telegram"
+    "telegram",
+    "telegrambot"
   ],
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-istanbul": "^4.1.4",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "coveralls": "^2.13.1",
     "eslint": "^4.6.1",

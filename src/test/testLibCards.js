@@ -1,6 +1,7 @@
 import * as test from 'unit.js';
 
 import cards from '../lib/cards/';
+
 /**
  * Telegram library function testing harness
  * @param {Object} config - configuration object

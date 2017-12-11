@@ -32,7 +32,7 @@ import request from 'request';
     * Request a card link from server using request library
     * @function getCardLink
     * @param {String} username - User's social media handle or unique identifier
-    * @param {String} network - User's social media network (e.g. 'twitter')
+    * @param {String} network - User's social media network (e.g. 'telegram')
     * @param {String} language - User's language as two letter code (e.g. 'en')
     * @return {String} cardId - Card identifier
     **/

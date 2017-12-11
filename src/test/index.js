@@ -12,16 +12,17 @@ import testTelegram from './testLibtelegram';
 import testMessages from './testMessages';
 import testReceive from './testReceive';
 
-// TODO complete const config
 const config = {
-  // TODO oauth?
-  // TODO app
   server: {
-    card_endpoint: 'httpsL//cards.rismap.us/flood',
-    card_api:
-      'http://127.0.0.1/',
-    api_key: process.env.SERVER_API_KEY,
+    card_endpoint: 'https://cards.riskmap.us/flood',
+    card_api: 'http://127.0.0.1/',
+    api_key: process.end.SERVER_API_KEY,
   },
 };
 
 // Call tests with the config
+testCards(config);
+testTelegram(config);
+testMessages(config);
+testReceive(config);
+

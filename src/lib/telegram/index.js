@@ -27,7 +27,6 @@ export default function(config) {
     console.log('Outgoing DMessage object: ' + JSON.stringify(body));
     return requestOptions;
   };
-// TODO: verify Telegram CRC
   /**
     * Prepares Telegram CRC response
     * @function crcResponse
@@ -44,7 +43,7 @@ export default function(config) {
   });
 
   /**
-   * Send direct Telegram message
+   * Send Telegram message
    * @function sendMessage
    * @param {Object} body - Telegram direct message body object
    * @return {Object} - Response object from Telegram

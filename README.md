@@ -30,10 +30,11 @@ Save a copy of sample.env as .env in local directory with appropriate credential
 * `BOT_TOKEN`: Access token created on creating a Telegram bot
 * `DEFAULT_LANG`: Current default language is English. You can add more languages here and parameterize replies for each language.
 * `CARD_PATH`: Front end's cards URL
-* `MAPSERVER`: Front end's map URL
+* `MAP_SERVER`: Front end's map URL
 * `X_API_KEY`: API Key needed to make calls to the deployed server (Set it to "" during local testing)
 * `PG_CON`: Connection string for the Postgres database
 * `SERVER`: Cognicity server URL to fetch unique cardIds
+* `API_SERVER`: Location of the data server
 
 #### Misc Notes
 - AWS credentials are stored in bash_profile
