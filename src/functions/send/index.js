@@ -1,7 +1,7 @@
 import telegram from '../../lib/telegram/';
 import messages from '../../lib/telegram/messages';
 
-onst config = {
+const config = {
     oauth: { 
           token: process.env.BOT_TOKEN,
         },
