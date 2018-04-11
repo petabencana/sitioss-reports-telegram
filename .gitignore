@@ -43,4 +43,4 @@ jspm_packages
 .env
 
 # OSX system
-.DS_Store/
+.DS_Store
