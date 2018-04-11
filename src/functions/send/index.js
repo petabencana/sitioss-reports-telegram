@@ -2,7 +2,7 @@ import telegram from '../../lib/telegram/';
 import messages from '../../lib/telegram/messages';
 
 const config = {
-    oauth: { 
+    oauth: {
           token: process.env.BOT_TOKEN,
         },
     app: {
@@ -25,6 +25,6 @@ module.exports.telegramReply = (event, context, callback) => {
   telegram(config).sendMessage(msg)
     .then((response) => console.log('Message sent.'))
     .catch((err) => console.log(`Error sending message, response from Twitter `
-    + `was: ` + JSON.stringify(err))); 
+    + `was: ` + JSON.stringify(err)));
 };
 
