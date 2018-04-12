@@ -1,21 +1,5 @@
 import * as test from 'unit.js';
-import telegram from '../lib/telegram/';
-
-const msg = {
-  event: {
-    type: 'message_create',
-    message_create: {
-      target: {
-        recipient_id: undefined,
-      },
-      message_data: {
-        text: `RiskMap bot helps you report flooding in realtime. `
-        + `Send /flood to report. In life-threatening situations always `
-        + `call 911.`,
-      },
-    },
-  },
-};
+import Telegram from '../lib/telegram';
 
 /**
  * Telegram library function testing harness
@@ -26,32 +10,57 @@ export default function(config) {
    * lib/telegram testing harness
   **/
   describe('lib/telegram Testing', function() {
-    it('Process a proper Telegram request object', function(done) {
-      let requestOptions = telegram(config)._prepareRequest(msg);
-      // console.log(telegram(config).config);
-      test.value(requestOptions.body).is(msg);
-      test.value(requestOptions.json).is(true);
-      test.value(requestOptions.headers)
-        .is({'content-type': 'application/json'});
+    const config = {
+      botToken: 'TOKEN',
+      cardsApi: 'https://data.cognicity.com/cards',
+      cardsApiKey: '123',
+      defaultLanguage: process.env.DEFAULT_LANGUAGE,
+      mapUrl: process.env.MAP_URL,
+      telegramEndpoint: 'https://api.telegram.org/bot',
+    };
+
+    const telegram = new Telegram(config);
+    const oldSendMessage = telegram._sendMessage;
+
+    it('Creates an instance of the class', function() {
+      test.value(telegram instanceof Telegram).is(true);
+    });
+
+    it('Succesfully prepares a request', function(done) {
+      test.value(telegram._prepareRequest('123', 'test message'))
+        .is('https://api.telegram.org/botTOKEN/sendmessage?text=test message&chat_id=123');
       done();
     });
-   // TODO: proper crc U& response token for telegram
-   it('Respond with proper crc token', function(done) {
-     telegram(config).crcResponse('1')
-     .then((response) => {
-       test.value(response).is({'response_token':
-        'sha256=gpHnS6og+oGBB9agylSs5UOjYhAPjm/XLzWLdKp3YTU='});
-       done();
-       });
-     });
 
-   it('Cannot issue telegram post, catch error', function(done) {
-     telegram(config).sendMessage(msg)
-     .catch((err) => {
-       test.value(err.code).is(`ECONNREFUSED`);
-       done();
-     });
+    before(function() {
+      telegram._sendMessage = function(req) {
+        return new Promise((resolve, reject) => {
+          resolve(req);
+        });
+      };
     });
+
+    it('Sends correct default message', function() {
+      telegram.sendDefault(
+        {
+          language: 'en',
+          userId: 'this-is-a-thirty-six-character-strin',
+        }
+      ).then((res) => {
+        test.value(res).is('https://api.telegram.org/botTOKEN/sendmessage?text=RiskMap bot helps you report flooding in realtime. \n        Send /flood to report. In life-threatening situations call 911.&chat_id=this-is-a-thirty-six-character-strin');
+      });
+    });
+
+    after(function() {
+      telegram._sendMessage = oldSendMessage;
+    });
+
+    // constructs
+    // _prepareRequest returns expected value
+    // sends expected message
+    // send card passes expected params
+    // send thanks passes expected params
+    // send default sends the default
  });
 }
 

@@ -10,7 +10,7 @@ export default function() {
   describe('lib/cards Testing - internal functionality', function() {
     const config = {
       botToken: process.env.BOT_TOKEN,
-      cardsApi:  'https://data.cognicity.com/cards',
+      cardsApi: 'https://data.cognicity.com/cards',
       cardsApiKey: '123',
       defaultLanguage: process.env.DEFAULT_LANGUAGE,
       mapUrl: process.env.MAP_URL,
@@ -19,9 +19,9 @@ export default function() {
     const cards = new Cards(config);
     const oldAxios = cards.axios;
 
-    before(function(){
+    before(function() {
       const mockAxios = {
-        post: function(url, body, headers){
+        post: function(url, body, headers) {
           return new Promise((resolve, reject) => {
             resolve(
               {
@@ -30,13 +30,13 @@ export default function() {
                 cardId: {
                   url: url,
                   body: body,
-                  headers
-                  }
+                  headers,
+                  },
                 }
               );
           });
-        }
-      }
+        },
+      };
       cards.axios = mockAxios;
     });
 
@@ -47,7 +47,8 @@ export default function() {
     it('Catches invalid properties', function(done) {
       cards.getCardId({})
         .catch((err) => {
-          test.value(err.message).is('child \"userId\" fails because [\"userId\" is required]');
+          test.value(err.message)
+            .is('child "userId" fails because ["userId" is required]');
           done();
         });
     });
@@ -55,34 +56,33 @@ export default function() {
     it('Sends correct parameters for request', function(done) {
       cards.getCardId(
         {
-          userId: "this-is-a-thirty-six-character-strin",
-          network: "telegram",
-          language: "en",
+          userId: 'this-is-a-thirty-six-character-strin',
+          network: 'telegram',
+          language: 'en',
         }
       ).then((res) => {
         test.value(res.url).is(config.cardsApi);
-        test.value(res.headers).is({'headers':{'x-api-key':'123'}});
+        test.value(res.headers).is({'headers': {'x-api-key': '123'}});
         test.value(res.body).is(
           {
-            username: "this-is-a-thirty-six-character-strin",
-            network: "telegram",
-            language: "en",
+            username: 'this-is-a-thirty-six-character-strin',
+            network: 'telegram',
+            language: 'en',
           }
-        )
+        );
         done();
-      })
-    })
+      });
+    });
 
-    after(function(){
+    after(function() {
       cards.axios = oldAxios;
     });
   });
 
   describe('lib/cards testing - catch bad responses from server', function() {
- 
     const config = {
       botToken: process.env.BOT_TOKEN,
-      cardsApi:  'https://data.cognicity.com/cards',
+      cardsApi: 'https://data.cognicity.com/cards',
       cardsApiKey: '123',
       defaultLanguage: process.env.DEFAULT_LANGUAGE,
       mapUrl: process.env.MAP_URL,
@@ -91,9 +91,9 @@ export default function() {
     const cards = new Cards(config);
     const oldAxios = cards.axios;
 
-    before(function(){
+    before(function() {
       const mockAxios = {
-        post: function(url, body, headers){
+        post: function(url, body, headers) {
           return new Promise((resolve, reject) => {
             resolve(
               {
@@ -102,38 +102,38 @@ export default function() {
                 cardId: {
                   url: url,
                   body: body,
-                  headers
-                  }
+                  headers,
+                  },
                 }
               );
           });
-        }
-      }
+        },
+      };
       cards.axios = mockAxios;
     });
 
     it('Catches bad return from server', function(done) {
-      cards.getCardId(        {
-        userId: "this-is-a-thirty-six-character-strin",
-        network: "telegram",
-        language: "en",
+      cards.getCardId( {
+        userId: 'this-is-a-thirty-six-character-strin',
+        network: 'telegram',
+        language: 'en',
       })
         .catch((err) => {
-          test.value(err.message).is('Could not get new card from server. Status code was 404');
+          test.value(err.message)
+            .is('Could not get new card from server. Status code was 404');
           done();
         });
     });
 
-    after(function(){
+    after(function() {
       cards.axios = oldAxios;
     });
   });
 
   describe('lib/cards testing - catch errors with axios', function() {
- 
     const config = {
       botToken: process.env.BOT_TOKEN,
-      cardsApi:  'https://data.cognicity.com/cards',
+      cardsApi: 'https://data.cognicity.com/cards',
       cardsApiKey: '123',
       defaultLanguage: process.env.DEFAULT_LANGUAGE,
       mapUrl: process.env.MAP_URL,
@@ -142,24 +142,24 @@ export default function() {
     const cards = new Cards(config);
     const oldAxios = cards.axios;
 
-    before(function(){
+    before(function() {
       const mockAxios = {
-        post: function(url, body, headers){
+        post: function(url, body, headers) {
           return new Promise((resolve, reject) => {
             reject(
               new Error('Generic error')
               );
           });
-        }
-      }
+        },
+      };
       cards.axios = mockAxios;
     });
 
     it('Catches bad return from server', function(done) {
-      cards.getCardId(        {
-        userId: "this-is-a-thirty-six-character-strin",
-        network: "telegram",
-        language: "en",
+      cards.getCardId( {
+        userId: 'this-is-a-thirty-six-character-strin',
+        network: 'telegram',
+        language: 'en',
       })
         .catch((err) => {
           test.value(err.message).is('Generic error');
@@ -167,8 +167,8 @@ export default function() {
         });
     });
 
-    after(function(){
+    after(function() {
       cards.axios = oldAxios;
     });
-  })
+  });
 }

@@ -4,7 +4,7 @@ import Joi from 'joi';
 const propertiesSchema = Joi.object().keys({
     userId: Joi.string().min(36).max(36).required(),
     network: Joi.string().required(),
-    language: Joi.string().required()
+    language: Joi.string().required(),
 });
 
 /**
@@ -32,8 +32,7 @@ export default class Cards {
      */
     getCardId(properties) {
         return new Promise((resolve, reject) => {
-
-            Joi.validate(properties, propertiesSchema, function(err, value){
+            Joi.validate(properties, propertiesSchema, function(err, value) {
                 if (err) reject(err);
             });
 

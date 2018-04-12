@@ -104,7 +104,7 @@ export default class Telegram {
    * @return {Promise} Result of _sendMessage request
    */
   sendDefault(properties) {
-    const message = this.messages.card(properties.language);
+    const message = this.messages.default(properties.language);
     const request = this._prepareRequest(properties.userId, message);
     return this._sendMessage(request);
   }

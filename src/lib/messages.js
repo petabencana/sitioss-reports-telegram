@@ -11,26 +11,26 @@ const messages = {
 };
 
 export default (config) => ({
-  default: function(lang) {
-    let response = messages[config.defaultLanugage].texts.default;
-    if (lang in messages) {
-      response = messages[lang].texts.default;
+  default: function(language) {
+    let response = messages[language].texts.default;
+    if (language in messages) {
+      response = messages[language].texts.default;
     }
     return response;
   },
-  card: function(lang, cardId) {
-    let response = messages[config.defaultLanguage].texts.default;
-    if (lang in messages) {
-      response = messages[lang].texts.card +
+  card: function(language, cardId) {
+    let response = messages[language].texts.default;
+    if (language in messages) {
+      response = messages[language].texts.card +
         config.server.card_endpoint +
         cardId;
     }
     return response;
   },
-  thanks: function(lang, reportId) {
-    let response = messages[config.defaultLanguage].texts.default;
-    if (lang in messages) {
-      response = messages[lang].texts.thanks + config.mapUrl + reportId;
+  thanks: function(language, reportId) {
+    let response = messages[language].texts.default;
+    if (language in messages) {
+      response = messages[language].texts.thanks + config.mapUrl + reportId;
     }
     return response;
   },
