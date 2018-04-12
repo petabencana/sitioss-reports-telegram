@@ -1,5 +1,6 @@
 import axios from 'axios';
 import messages from './messages';
+import Cards from './cards';
 /**
  * Class for sending CogniCity messages via Telegram
  * @class Telegram
@@ -14,6 +15,7 @@ export default class Telegram {
   constructor(config) {
     this.config = config;
     this.messages = messages(config);
+    this.cards = new Cards(config);
   }
 
   /**
@@ -25,8 +27,8 @@ export default class Telegram {
     * @return {String} - URI for request
   **/
   _prepareRequest(userId, message) {
-    return (this.config.app.telegramEndpoint +
-            this.config.app.botToken +
+    return (this.config.telegramEndpoint +
+            this.config.botToken +
             '/sendmessage?text=' +
             message +
             '&chat_id=' +
@@ -54,14 +56,27 @@ export default class Telegram {
    * @method sendCard
    * @param {Object} properties - properties of message to send
    * @param {String} properties.userId - User ID or chat ID to send message to
-   * @param {String} properties.cardId - Card identifier for uniquie link
    * @param {String} properties.language - Language of response
    * @return {Promise} Result of _sendMessage request
    */
   sendCard(properties) {
-    const message = this.messages.card(properties.language, properties.cardId);
-    const request = this._prepareRequest(properties.userId, message);
-    return this._sendMessage(request);
+    return new Promise((resolve, reject) => {
+      // Get a card id
+      this.cards.getCardId({
+        userId: properties.userId,
+        network: 'telegram',
+        language: properties.language,
+      }).then((cardId) => {
+        // Build the response
+        const message = this.messages.card(properties.language,
+          properties.cardId);
+        const request = this._prepareRequest(properties.userId, message);
+        // Return the promise
+        resolve(this._sendMessage(request));
+      }).catch((err) => {
+        reject(err);
+});
+    });
   }
 
   /**

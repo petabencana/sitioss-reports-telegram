@@ -12,14 +12,14 @@ const messages = {
 
 export default (config) => ({
   default: function(lang) {
-    let response = messages[config.app.default_lang].texts.default;
+    let response = messages[config.defaultLanugage].texts.default;
     if (lang in messages) {
       response = messages[lang].texts.default;
     }
     return response;
   },
   card: function(lang, cardId) {
-    let response = messages[config.app.default_lang].texts.default;
+    let response = messages[config.defaultLanguage].texts.default;
     if (lang in messages) {
       response = messages[lang].texts.card +
         config.server.card_endpoint +
@@ -28,7 +28,7 @@ export default (config) => ({
     return response;
   },
   thanks: function(lang, reportId) {
-    let response = messages[config.app.default_lang].texts.default;
+    let response = messages[config.defaultLanguage].texts.default;
     if (lang in messages) {
       response = messages[lang].texts.thanks + config.mapUrl + reportId;
     }

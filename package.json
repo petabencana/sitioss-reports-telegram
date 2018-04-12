@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^4.0.0",
+    "joi": "^13.1.2",
     "request": "^2.81.0",
     "telegraf": "^3.6.4"
   },

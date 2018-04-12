@@ -2,20 +2,15 @@
 require('dotenv').config();
 
 // Function for sending Telegram messages
-import receive from './receive';
+import Receive from './receive';
 
 const config = {
-  oauth: {
-    token: process.env.BOT_TOKEN,
-  },
-  app: {
-    default_lang: process.env.DEFAULT_LANG,
-    mapUrl: process.env.MAP_URL,
-  },
-  server: {
-    cardApi: process.env.CARD_API,
-    apiKey: process.env.X_API_KEY,
-  },
+  botToken: process.env.BOT_TOKEN,
+  cardApi: process.env.CARD_API,
+  cardApiKey: process.env.CARD_API_KEY,
+  defaultLanguage: process.env.DEFAULT_LANGUAGE,
+  mapUrl: process.env.MAP_URL,
+  telegramEndpoint: process.env.telegramEndpoint,
 };
 
 /**
@@ -26,10 +21,12 @@ const config = {
  * @param {Function} callback - Callback
  */
 module.exports.telegramWebhook = (event, context, callback) => {
-      receive(config).process(event)
-        .then(callback(null))
+      const receive = new Receive(config);
+
+      receive.process(event)
+        .then((res) => callback(null))
         .catch((err) => {
-          console.log('error is here in post: ' + err);
+          console.log('Error in Telegram reply. ' + err);
           callback(null);
         });
 };

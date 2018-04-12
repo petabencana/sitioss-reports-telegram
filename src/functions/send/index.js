@@ -1,4 +1,4 @@
-import telegram from '../../lib/telegram/';
+/* import telegram from '../../lib/telegram/';
 import messages from '../../lib/telegram/messages';
 
 const config = {
@@ -22,5 +22,5 @@ module.exports.telegramReply = (event, context, callback) => {
     .then((response) => console.log('Message sent.'))
     .catch((err) => console.log(`Error sending message, response from Twitter `
     + `was: ` + JSON.stringify(err)));
-};
+};*/
 
