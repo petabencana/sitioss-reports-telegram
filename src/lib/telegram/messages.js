@@ -1,51 +1,37 @@
-// Prepare message
-const texts = '{"in":'
-+ '{"event":{"type":"message_create","message_create":'
-+ '{"target":{},'
-+ '"message_data":{"text":"RiskMap bot helps you report flooding in realtime. '
-+ 'Send /flood to report. '
-+ 'In life-threatening situations always call 911."}}}},'
-+ '"en":'
-+ '{"event":{"type":"message_create","message_create":'
-+ '{"target":{},'
-+ '"message_data":{"text":"RiskMap bot helps you report flooding in realtime. '
-+ 'Send /flood to report. '
-+ 'In life-threatening situations always call 911."}}}}}';
+// Prepare messages for Telegram bot
+const messages = {
+  en: {
+    texts: {
+      default: `RiskMap bot helps you report flooding in realtime. 
+        Send /flood to report. In life-threatening situations call 911.`,
+      card: 'Please report using this one-time link ',
+      thanks: 'Thank you for your report. You can access it using this link ',
+    },
+  },
+};
 
 export default (config) => ({
-  default: function(lang, userId) {
-    let messages = JSON.parse(texts);
-    let response = messages[config.app.default_lang];
+  default: function(lang) {
+    let response = messages[config.app.default_lang].texts.default;
     if (lang in messages) {
-      response = messages[lang];
+      response = messages[lang].texts.default;
     }
-    response.event.message_create.target.recipient_id = userId;
     return response;
   },
-  card: function(lang, userId, cardId) {
-    // TODO multi lang support
-    let messages = JSON.parse(texts);
-    let response = messages[config.app.default_lang];
+  card: function(lang, cardId) {
+    let response = messages[config.app.default_lang].texts.default;
     if (lang in messages) {
-      response = messages[lang];
+      response = messages[lang].texts.card +
+        config.server.card_endpoint +
+        cardId;
     }
-    response.event.message_create.target.recipient_id = userId;
-    response.event.message_create.message_data.text =
-      `Please report using this one-time link ` + config.server.card_endpoint
-      + cardId;
     return response;
   },
-  thanks: function(lang, userId, reportId) {
-    // TODO multi lang support
-    let messages = JSON.parse(texts);
-    let response = messages[config.app.default_lang];
+  thanks: function(lang, reportId) {
+    let response = messages[config.app.default_lang].texts.default;
     if (lang in messages) {
-      response = messages[lang];
+      response = messages[lang].texts.thanks + config.mapUrl + reportId;
     }
-    response.event.message_create.target.recipient_id = userId;
-    response.event.message_create.message_data.text = `Thank you for your ` +
-    `report. You can access it using this link https://riskmap.us/map/broward/`
-    + reportId;
     return response;
   },
 });

@@ -14,9 +14,8 @@ import testReceive from './testReceive';
 
 const config = {
   server: {
-    card_endpoint: 'https://cards.riskmap.us/flood',
-    card_api: 'http://127.0.0.1/',
-    api_key: process.end.SERVER_API_KEY,
+    cardApi: 'http://127.0.0.1/',
+    apiKey: process.env.SERVER_API_KEY,
   },
 };
 

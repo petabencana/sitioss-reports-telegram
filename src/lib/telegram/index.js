@@ -1,63 +1,96 @@
-import request from 'request';
-import crypto from 'crypto';
+import axios from 'axios';
+import messages from './messages';
 /**
- * Telegram object for direct message interactions
+ * Class for sending CogniCity messages via Telegram
+ * @class Telegram
  * @param {Object} config - telegram parameters
  * @return {Object} Function methods
  **/
-export default function(config) {
-  let methods = {};
+export default class Telegram {
   /**
-    * Prepares Telegram message request object
-    * @function _prepareRequest
-    * @param {Object} body - message body object
-    * @return {Object} - Twitter message request object
-  **/
-  methods._prepareRequest = function(body) {
-    let requestOptions = {
-      url: config.app.telegram_endpoint,
-      oauth: config.oauth, // verify oauth context for telegram
-      json: true,
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: body,
-    };
-    // Log the message
-    console.log('Outgoing DMessage object: ' + JSON.stringify(body));
-    return requestOptions;
-  };
-  /**
-    * Prepares Telegram CRC response
-    * @function crcResponse
-    * @param {Object} token - request token
-    * @return {Object} - Telegram CRC response
-  **/
-  methods.crcResponse = (token) => new Promise((resolve, reject) => {
-    let hash = crypto.createHmac('sha256', config.app.consumer_secret)
-      .update(token)
-      .digest('base64');
-    let hashstring = 'sha256=' + hash;
-    let response = JSON.parse('{"response_token": "'+hashstring+'"}');
-    resolve(response);
-  });
+   * constructor for class Telegram
+   * @param {Object} config - telegram parameters
+   */
+  constructor(config) {
+    this.config = config;
+    this.messages = messages(config);
+  }
 
   /**
-   * Send Telegram message
-   * @function sendMessage
-   * @param {Object} body - Telegram direct message body object
-   * @return {Object} - Response object from Telegram
-   **/
-  methods.sendMessage = (body) => new Promise((resolve, reject) => {
-    let opts = methods._prepareRequest(body);
-    // Send the message
-    request.post(opts, function(error, response, body) {
-      if (!error) {
-        resolve(response);
-      } else {
-        reject(error);
-      }
+    * Prepares Telegram message request object
+    * @method _prepareRequest
+    * @private
+    * @param {String} userId - User or Telegram chat ID for reply
+    * @param {String} message - Message to send
+    * @return {String} - URI for request
+  **/
+  _prepareRequest(userId, message) {
+    return (this.config.app.telegramEndpoint +
+            this.config.app.botToken +
+            '/sendmessage?text=' +
+            message +
+            '&chat_id=' +
+            userId
+          );
+  }
+
+  /**
+   * Sends a Telegram message
+   * @method _sendMessage
+   * @private
+   * @param {String} requestString - URI for Telegram API
+   * @return {Promise} - Result of post request
+   */
+  _sendMessage(requestString) {
+    return new Promise((resolve, reject) => {
+      axios.post(requestString, {})
+        .then((response) => resolve(response))
+        .catch((err) => reject(err));
     });
-  });
-return methods;
+  }
+
+  /**
+   * sendCard - Method to send report card to Telegram user
+   * @method sendCard
+   * @param {Object} properties - properties of message to send
+   * @param {String} properties.userId - User ID or chat ID to send message to
+   * @param {String} properties.cardId - Card identifier for uniquie link
+   * @param {String} properties.language - Language of response
+   * @return {Promise} Result of _sendMessage request
+   */
+  sendCard(properties) {
+    const message = this.messages.card(properties.language, properties.cardId);
+    const request = this._prepareRequest(properties.userId, message);
+    return this._sendMessage(request);
+  }
+
+  /**
+   * sendThanks - Method to send report link to Telegram user
+   * @method sendThanks
+   * @param {Object} properties - properties of message to send
+   * @param {String} properties.userId - User ID or chat ID to send message to
+   * @param {String} properties.reportId - Report identifier for uniquie link
+   * @param {String} properties.language - Language of response
+   * @return {Promise} Result of _sendMessage request
+   */
+  sendThanks(properties) {
+    const message = this.messages.thanks(properties.language,
+      properties.reportId);
+    const request = this._prepareRequest(properties.userId, message);
+    return this._sendMessage(request);
+  }
+
+  /**
+   * sendDefault - Method to send default message Telegram user
+   * @method sendDefault
+   * @param {Object} properties - properties of message to send
+   * @param {String} properties.userId - User ID or chat ID to send message to
+   * @param {String} properties.language - Language of response
+   * @return {Promise} Result of _sendMessage request
+   */
+  sendDefault(properties) {
+    const message = this.messages.card(properties.language);
+    const request = this._prepareRequest(properties.userId, message);
+    return this._sendMessage(request);
+  }
 }

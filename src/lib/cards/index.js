@@ -45,11 +45,11 @@ import request from 'request';
       };
       // Get a card from Cognicity server
       request({
-        url: config.server.card_api,
+        url: config.server.cardApi,
         method: 'post',
         headers: {
           'content-type': 'application/json',
-          'x-api-key': config.server.api_key,
+          'x-api-key': config.server.apiKey,
         },
         port: 443,
         json: true,

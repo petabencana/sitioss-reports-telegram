@@ -12,13 +12,13 @@ export default function(config) {
   /**
     * Classifies incoming direct messages by keyword
     * @function _filter
-    * @param {Object} messageEvent - Telegram message event object
+    * @param {Object} message - Telegram message event object
     * @return {String} - Type of message
   **/
-  methods._classify = function(messageEvent) {
+  methods._classify = function(message) {
     // first check this isn't from the bot
     const re = new RegExp(/\/flood/gi);
-    if (re.exec(messageEvent.message_create.message_data.text) !== null) {
+    if (re.exec(message.text) !== null) {
       return 'flood';
     } else {
       return null;
@@ -68,32 +68,26 @@ export default function(config) {
     * @return {Object} - Promise that all messages issued
   **/
   methods.process = (event) => new Promise((resolve, reject) => {
-    let replies = []; // Array of replies for this event
-    // loop through direct messages
-    event.body.direct_message_events.forEach(function(messageEvent) {
-      // check this isn't from the bot
-      if (messageEvent.type === 'message_create') {
-        // User id
-        let userId = messageEvent.message_create.sender_id;
+        const message = event.message;
+        // Get UserId (Telegram Chat ID)
+        let userId = message.chatId;
         // Respond based on user input
-        switch (methods._classify(messageEvent)) {
+        switch (methods._classify(message)) {
           // Send the user a card
           case 'flood':
             // Get a card link
-            replies.push(methods._sendCard(userId));
+            methods._sendCard(userId)
+              .then((response) => resolve(response))
+              .catch((err) => reject(err));
             break;
           // Send the user the default message
           default:
-            replies.push(methods._sendDefault(userId));
+            // Get a card link
+            methods._sendDefault(userId)
+              .then((response) => resolve(response))
+              .catch((err) => reject(err));
             break;
         }
-      }
-    });
-    Promise.all(replies).then((values) => {
-      resolve(values);
-    }).catch((err) => {
-      reject(err);
-    });
   });
   return methods;
 }
