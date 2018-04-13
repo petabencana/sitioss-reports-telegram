@@ -42,7 +42,7 @@ export default class Receive {
     // Build properties object for telegram class methods
     const properties = {
       userId: message.chat.id,
-      language: this.config.defaultLanguage,
+      language: this.config.DEFAULT_LANGUAGE,
     };
     // Reply based on message content
     switch (this._classify(message.text)) {

@@ -15,8 +15,8 @@ export default class Cards {
     /**
      * Constructor for class Cards
      * @param {Object} config - configuration object
-     * @param {String} config.cardsApi - cards endpoint
-     * @param {String} config.cardsApiKey - cards endpoint API key
+     * @param {String} config.CARDS_API - cards endpoint
+     * @param {String} config.CARDS_API_KEY - cards endpoint API key
      */
     constructor(config) {
         this.config = config;
@@ -38,7 +38,7 @@ export default class Cards {
 
             const headers = {
                 'headers': {
-                    'x-api-key': this.config.cardsApiKey,
+                    'x-api-key': this.config.CARDS_API_KEY,
                 },
             };
 
@@ -48,7 +48,7 @@ export default class Cards {
                 language: properties.language,
             };
 
-            this.axios.post(this.config.cardsApi, body, headers)
+            this.axios.post(this.config.CARDS_API, body, headers)
                 .then((res) => {
                     if (res.statusCode === 200 && res.created === true) {
                         resolve(res.cardId);

@@ -22,7 +22,7 @@ export default (config) => ({
     let response = messages[language].texts.default;
     if (language in messages) {
       response = messages[language].texts.card +
-        config.cardsUrl +
+        config.CARDS_URL +
         cardId;
     }
     return response;
@@ -30,7 +30,7 @@ export default (config) => ({
   thanks: function(language, reportId) {
     let response = messages[language].texts.default;
     if (language in messages) {
-      response = messages[language].texts.thanks + config.mapUrl + reportId;
+      response = messages[language].texts.thanks + config.MAP_URL + reportId;
     }
     return response;
   },

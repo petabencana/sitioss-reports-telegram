@@ -1,23 +1,15 @@
 import * as test from 'unit.js';
 
 import Receive from '../functions/receive/receive.js';
-
+import config from '../config';
 
 /**
  * Telegram library function testing harness
- * @param {Object} config - configuration object
  */
-export default function(config) {
+export default function() {
   describe('receive/get Testing', function() {
-    const config = {
-      botToken: 'TOKEN',
-      cardsApi: 'https://data.cognicity.com/cards/',
-      cardsApiKey: '123',
-      cardsUrl: 'https://cards.cognicity.com/',
-      defaultLanguage: 'en',
-      mapUrl: 'https://map.cognicity.com/',
-      telegramEndpoint: 'https://api.telegram.org/bot',
-    };
+    config.BOT_TOKEN = 'TOKEN',
+    config.CARDS_API_KEY = '123';
 
     const receive = new Receive(config);
 

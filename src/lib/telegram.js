@@ -28,8 +28,8 @@ export default class Telegram {
     * @return {String} - URI for request
   **/
   _prepareRequest(userId, message) {
-    return (this.config.telegramEndpoint +
-            this.config.botToken +
+    return (this.config.TELEGRAM_ENDPOINT +
+            this.config.BOT_TOKEN +
             '/sendmessage?text=' +
             message +
             '&chat_id=' +

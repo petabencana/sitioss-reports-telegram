@@ -1,6 +1,7 @@
 import * as test from 'unit.js';
 
 import Cards from '../lib/cards';
+import config from '../config';
 
 /**
  * Telegram library function testing harness
@@ -8,15 +9,9 @@ import Cards from '../lib/cards';
  **/
 export default function() {
   describe('lib/cards Testing - internal functionality', function() {
-    const config = {
-      botToken: 'TOKEN',
-      cardsApi: 'https://data.cognicity.com/cards/',
-      cardsApiKey: '123',
-      cardsUrl: 'https://cards.cognicity.com/',
-      defaultLanguage: process.env.DEFAULT_LANGUAGE,
-      mapUrl: 'https://map.cognicity.com/',
-      telegramEndpoint: 'https://api.telegram.org/bot',
-    };
+    config.BOT_TOKEN = 'TOKEN',
+    config.CARDS_API_KEY = '123';
+
     const cards = new Cards(config);
     const oldAxios = cards.axios;
 
@@ -41,7 +36,7 @@ export default function() {
       cards.axios = mockAxios;
     });
 
-    it('Creates a valud object', function() {
+    it('Creates a valid object', function() {
       test.value(cards instanceof Cards).is(true);
     });
 
@@ -62,7 +57,7 @@ export default function() {
           language: 'en',
         }
       ).then((res) => {
-        test.value(res.url).is(config.cardsApi);
+        test.value(res.url).is(config.CARDS_API);
         test.value(res.headers).is({'headers': {'x-api-key': '123'}});
         test.value(res.body).is(
           {
@@ -81,14 +76,9 @@ export default function() {
   });
 
   describe('lib/cards testing - catch bad responses from server', function() {
-    const config = {
-      botToken: process.env.BOT_TOKEN,
-      cardsApi: 'https://data.cognicity.com/cards',
-      cardsApiKey: '123',
-      defaultLanguage: process.env.DEFAULT_LANGUAGE,
-      mapUrl: process.env.MAP_URL,
-      telegramEndpoint: process.env.telegramEndpoint,
-    };
+    config.BOT_TOKEN = 'TOKEN',
+    config.CARDS_API_KEY = '123';
+
     const cards = new Cards(config);
     const oldAxios = cards.axios;
 
@@ -132,15 +122,9 @@ export default function() {
   });
 
   describe('lib/cards testing - catch errors with axios', function() {
-    const config = {
-      botToken: process.env.BOT_TOKEN,
-      cardsApi: 'https://data.cognicity.com/cards',
-      cardsApiKey: '123',
-      cardsUrl: 'https://cards.cognicity.com/',
-      defaultLanguage: process.env.DEFAULT_LANGUAGE,
-      mapUrl: process.env.MAP_URL,
-      telegramEndpoint: process.env.telegramEndpoint,
-    };
+    config.BOT_TOKEN = 'TOKEN',
+    config.CARDS_API_KEY = '123';
+
     const cards = new Cards(config);
     const oldAxios = cards.axios;
 

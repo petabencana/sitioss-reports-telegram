@@ -1,24 +1,19 @@
 import * as test from 'unit.js';
 import Telegram from '../lib/telegram';
+import config from '../config';
 
 /**
  * Telegram library function testing harness
- * @param {Object} config - configuration object
  **/
-export default function(config) {
+export default function() {
   /**
    * lib/telegram testing harness
   **/
   describe('lib/telegram Testing', function() {
-    const config = {
-      botToken: 'TOKEN',
-      cardsApi: 'https://data.cognicity.com/cards/',
-      cardsApiKey: '123',
-      cardsUrl: 'https://cards.cognicity.com/',
-      defaultLanguage: process.env.DEFAULT_LANGUAGE,
-      mapUrl: 'https://map.cognicity.com/',
-      telegramEndpoint: 'https://api.telegram.org/bot',
-    };
+    config.BOT_TOKEN = 'TOKEN',
+    config.CARDS_API_KEY = '123';
+    config.MAP_URL = 'https://map.cognicity.com/';
+    config.CARDS_URL = 'https://cards.cognicity.com/';
 
     const telegram = new Telegram(config);
     const oldSendMessage = telegram._sendMessage;
@@ -94,15 +89,8 @@ export default function(config) {
  });
 
  describe('lib/telegram testing - _sendMessage function', function() {
-  const config = {
-    botToken: 'TOKEN',
-    cardsApi: 'https://data.cognicity.com/cards/',
-    cardsApiKey: '123',
-    cardsUrl: 'https://cards.cognicity.com/',
-    defaultLanguage: process.env.DEFAULT_LANGUAGE,
-    mapUrl: 'https://map.cognicity.com/',
-    telegramEndpoint: 'https://api.telegram.org/bot',
-  };
+  config.BOT_TOKEN = 'TOKEN',
+  config.CARDS_API_KEY = '123';
 
   const telegram = new Telegram(config);
   const oldAxios = telegram.axios;
@@ -131,15 +119,8 @@ export default function(config) {
  });
 
  describe('lib/telegram testing - handles errors', function() {
-  const config = {
-    botToken: 'TOKEN',
-    cardsApi: 'https://data.cognicity.com/cards/',
-    cardsApiKey: '123',
-    cardsUrl: 'https://cards.cognicity.com/',
-    defaultLanguage: process.env.DEFAULT_LANGUAGE,
-    mapUrl: 'https://map.cognicity.com/',
-    telegramEndpoint: 'https://api.telegram.org/bot',
-  };
+  config.BOT_TOKEN = 'TOKEN',
+  config.CARDS_API_KEY = '123';
 
   const telegram = new Telegram(config);
   const oldAxios = telegram.axios;
