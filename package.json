@@ -4,7 +4,7 @@
   "description": "Telegram chatbot running on AWS lambda",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint src",
+    "lint": "eslint --fix src",
     "mocha": "nyc mocha --compilers js:babel-core/register src/test/index",
     "coverage": "nyc report --reporter=test-lcov | coveralls",
     "test": "npm run lint && npm run mocha",

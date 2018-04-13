@@ -135,6 +135,7 @@ export default function() {
       botToken: process.env.BOT_TOKEN,
       cardsApi: 'https://data.cognicity.com/cards',
       cardsApiKey: '123',
+      cardsUrl: 'https://cards.cognicity.com/',
       defaultLanguage: process.env.DEFAULT_LANGUAGE,
       mapUrl: process.env.MAP_URL,
       telegramEndpoint: process.env.telegramEndpoint,

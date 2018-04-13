@@ -9,7 +9,6 @@
 //  Unit tests
 import testCards from './testLibcards';
 import testTelegram from './testLibtelegram';
-// import testMessages from './testMessages';
 // import testReceive from './testReceive';
 
 

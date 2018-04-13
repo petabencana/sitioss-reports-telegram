@@ -16,6 +16,7 @@ export default class Telegram {
     this.config = config;
     this.messages = messages(config);
     this.cards = new Cards(config);
+    this.axios = axios;
   }
 
   /**
@@ -45,7 +46,7 @@ export default class Telegram {
    */
   _sendMessage(requestString) {
     return new Promise((resolve, reject) => {
-      axios.post(requestString, {})
+      this.axios.post(requestString, {})
         .then((response) => resolve(response))
         .catch((err) => reject(err));
     });
@@ -68,14 +69,13 @@ export default class Telegram {
         language: properties.language,
       }).then((cardId) => {
         // Build the response
-        const message = this.messages.card(properties.language,
-          properties.cardId);
+        const message = this.messages.card(properties.language, cardId);
         const request = this._prepareRequest(properties.userId, message);
         // Return the promise
         resolve(this._sendMessage(request));
       }).catch((err) => {
         reject(err);
-});
+        });
     });
   }
 

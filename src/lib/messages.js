@@ -22,7 +22,7 @@ export default (config) => ({
     let response = messages[language].texts.default;
     if (language in messages) {
       response = messages[language].texts.card +
-        config.server.card_endpoint +
+        config.cardsUrl +
         cardId;
     }
     return response;
