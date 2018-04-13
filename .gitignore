@@ -44,3 +44,4 @@ jspm_packages
 
 # OSX system
 .DS_Store
+bin
