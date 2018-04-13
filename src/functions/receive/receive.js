@@ -38,10 +38,11 @@ export default class Receive {
     * @return {Promise} - Response from send message request
   **/
   process(event) {
+    console.log(event);
     const message = event.message; // The incoming Telegram message object
     // Build properties object for telegram class methods
     const properties = {
-      userId: message.chat.id,
+      userId: String(message.chat.id),
       language: this.config.DEFAULT_LANGUAGE,
     };
     // Reply based on message content

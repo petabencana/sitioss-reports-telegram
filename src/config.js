@@ -1,6 +1,7 @@
 require('dotenv').config({silent: true});
 
 export default {
+    API_GW: process.env.API_GW,
     BOT_TOKEN: process.env.BOT_TOKEN,
     CARDS_API: process.env.CARDS_API || 'https://data.riskmap.us/cards/',
     CARDS_API_KEY: process.env.CARDS_API_KEY,

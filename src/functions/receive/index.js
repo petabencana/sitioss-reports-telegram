@@ -13,10 +13,19 @@ import config from '../../config';
  * @param {Function} callback - Callback
  */
 export default (event, context, callback) => {
-      const receive = new Receive(config);
+      const response = {
+        statusCode: 200,
+        headers: {},
+        body: JSON.stringify({}),
+      };
+      // Send telegram a reply immediately to stop multiple messages to user.
+      callback(null, response);
 
-      receive.process(event)
-        .then((res) => callback(null))
+      const receive = new Receive(config);
+      receive.process(JSON.parse(event.body))
+        .then((res) => {
+          console.log('Reply sent to user');
+        })
         .catch((err) => {
           console.log('Error in Telegram reply. ' + err);
           callback(null);

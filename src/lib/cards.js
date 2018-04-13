@@ -48,13 +48,15 @@ export default class Cards {
                 language: properties.language,
             };
 
+            // TODO verify whether res.statusCode is an object on this endpoint.
             this.axios.post(this.config.CARDS_API, body, headers)
                 .then((res) => {
-                    if (res.statusCode === 200 && res.created === true) {
-                        resolve(res.cardId);
+                    if (res.data.created === true) {
+                        resolve(res.data.cardId);
                     } else {
+                        console.log(res.data);
                         reject(new Error(`Could not get new card from server.` +
-                            ` Status code was ` + res.statusCode));
+                            ` Result was ` + JSON.stringify(res.data)));
                     }
                 })
                 .catch((err) => reject(err));

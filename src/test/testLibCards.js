@@ -21,12 +21,14 @@ export default function() {
           return new Promise((resolve, reject) => {
             resolve(
               {
-                statusCode: 200,
-                created: true,
-                cardId: {
-                  url: url,
-                  body: body,
-                  headers,
+                data: {
+                  statusCode: 200,
+                  created: true,
+                  cardId: {
+                    url: url,
+                    body: body,
+                    headers,
+                    },
                   },
                 }
               );
@@ -88,12 +90,14 @@ export default function() {
           return new Promise((resolve, reject) => {
             resolve(
               {
-                statusCode: 404,
-                created: true,
-                cardId: {
-                  url: url,
-                  body: body,
-                  headers,
+                data: {
+                  statusCode: 404,
+                  created: false,
+                  cardId: {
+                    url: url,
+                    body: body,
+                    headers,
+                    },
                   },
                 }
               );
@@ -103,7 +107,7 @@ export default function() {
       cards.axios = mockAxios;
     });
 
-    it('Catches bad return from server', function(done) {
+    it('Catches error return from card server', function(done) {
       cards.getCardId( {
         userId: 'this-is-a-thirty-six-character-strin',
         network: 'telegram',
@@ -111,7 +115,7 @@ export default function() {
       })
         .catch((err) => {
           test.value(err.message)
-            .is('Could not get new card from server. Status code was 404');
+            .is('Could not get new card from server. Result was {"statusCode":404,"created":false,"cardId":{"url":"https://data-dev.riskmap.us/cards/","body":{"username":"this-is-a-thirty-six-character-strin","network":"telegram","language":"en"},"headers":{"headers":{"x-api-key":"123"}}}}');
           done();
         });
     });
