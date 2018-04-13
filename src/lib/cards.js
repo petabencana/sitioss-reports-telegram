@@ -2,7 +2,7 @@ import axios from 'axios';
 import Joi from 'joi';
 
 const propertiesSchema = Joi.object().keys({
-    userId: Joi.string().min(36).max(36).required(),
+    userId: Joi.string().required(),
     network: Joi.string().required(),
     language: Joi.string().required(),
 });

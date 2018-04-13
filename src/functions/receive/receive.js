@@ -18,13 +18,13 @@ export default class Receive {
   /**
     * Classifies incoming direct messages by keyword
     * @function _classify
-    * @param {String} message - Telegram message text from user
+    * @param {String} text - Telegram message text from user
     * @return {String} - Type of message
   **/
-  _classify(message) {
+  _classify(text) {
     // filter the message by keyword
     const re = new RegExp(/\/flood/gi);
-    if (re.exec(message.text) !== null) {
+    if (re.exec(text) !== null) {
       return 'flood';
     } else {
       return null;

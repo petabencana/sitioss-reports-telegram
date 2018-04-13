@@ -9,12 +9,13 @@ import Cards from '../lib/cards';
 export default function() {
   describe('lib/cards Testing - internal functionality', function() {
     const config = {
-      botToken: process.env.BOT_TOKEN,
-      cardsApi: 'https://data.cognicity.com/cards',
+      botToken: 'TOKEN',
+      cardsApi: 'https://data.cognicity.com/cards/',
       cardsApiKey: '123',
+      cardsUrl: 'https://cards.cognicity.com/',
       defaultLanguage: process.env.DEFAULT_LANGUAGE,
-      mapUrl: process.env.MAP_URL,
-      telegramEndpoint: process.env.telegramEndpoint,
+      mapUrl: 'https://map.cognicity.com/',
+      telegramEndpoint: 'https://api.telegram.org/bot',
     };
     const cards = new Cards(config);
     const oldAxios = cards.axios;

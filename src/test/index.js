@@ -9,12 +9,12 @@
 //  Unit tests
 import testCards from './testLibcards';
 import testTelegram from './testLibtelegram';
-// import testReceive from './testReceive';
+import testReceive from './testReceive';
 
 
 //  Call tests with the config
 testCards();
 testTelegram();
 // testMessages(config);
-// testReceive(config);
+testReceive();
 
