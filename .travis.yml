@@ -5,7 +5,7 @@ node_js: '8.10'
 install: npm install
 
 script:
-  - npm run test && npm run coverage
+  - npm run test
 
 before_deploy:
   - npm run build
