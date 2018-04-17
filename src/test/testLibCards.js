@@ -115,7 +115,7 @@ export default function() {
       })
         .catch((err) => {
           test.value(err.message)
-            .is('Could not get new card from server. Result was {"statusCode":404,"created":false,"cardId":{"url":"https://data-dev.riskmap.us/cards/","body":{"username":"this-is-a-thirty-six-character-strin","network":"telegram","language":"en"},"headers":{"headers":{"x-api-key":"123"}}}}');
+            .is('Could not get new card from server. Result was {"statusCode":404,"created":false,"cardId":{"url":"https://data.riskmap.us/cards/","body":{"username":"this-is-a-thirty-six-character-strin","network":"telegram","language":"en"},"headers":{"headers":{"x-api-key":"123"}}}}');
           done();
         });
     });
