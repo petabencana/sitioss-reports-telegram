@@ -13,7 +13,7 @@ before_deploy:
 
 deploy:
   provider: "lambda"
-  function_name: "cognicity-telegram-webhook-"$BRANCH
+  function_name: "cognicity-telegram-webhook-$BRANCH"
   region: $AWS_REGION
   role: $AWS_LAMBDA_ROLE
   runtime: "nodejs8.10"
