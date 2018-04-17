@@ -21,3 +21,14 @@ deploy:
   on:
     branch: dev
 
+deploy: 
+  provider: lambda
+  function_name: "cognicity-telegram-reply-dev"
+  region: $AWS_REGION
+  role: $AWS_LAMBDA_ROLE
+  runtime: "nodejs8.10"
+  module_name: "bin/functions/send/index"
+  handler_name: "default"
+  on:
+    branch: dev
+
