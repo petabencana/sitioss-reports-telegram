@@ -11,7 +11,7 @@ export default (event, context, callback) => {
     {
       userId: message.username,
       reportId: message.report_id,
-      language: config.defaultLanguage,
+      language: config.DEFAULT_LANGUAGE,
     }
   ).then((response) => {
     console.log('Message sent');
