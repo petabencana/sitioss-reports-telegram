@@ -1,6 +1,6 @@
 language: node_js
 
-node_js: '8.10'
+node_js: '6.10'
 
 install: npm install
 
@@ -16,7 +16,7 @@ deploy::
   region: $AWS_REGION
   role: $AWS_LAMBDA_ROLE
   runtime: "nodejs8.10"
-  module_name: "bin/functions/notify/index"
+  module_name: "bin/functions/receive/index"
   handler_name: "default"
   on:
     branch: dev
