@@ -9,14 +9,15 @@ script:
 
 before_deploy:
   - npm run build
-  - if [[ $TRAVIS_BRANCH != 'master' ]]; then BRANCH='dev'; else BRANCH='master'; fi;
 
-deploy:
+deploy:: 
   provider: "lambda"
-  function_name: "cognicity-telegram-webhook-$BRANCH"
+  function_name: "cognicity-telegram-webhook-dev"
   region: $AWS_REGION
   role: $AWS_LAMBDA_ROLE
   runtime: "nodejs8.10"
   module_name: "bin/functions/notify/index"
   handler_name: "default"
+  on:
+    branch: dev
 
