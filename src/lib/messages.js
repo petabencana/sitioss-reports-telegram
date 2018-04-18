@@ -27,11 +27,11 @@ export default (config) => ({
     }
     return response;
   },
-  thanks: function(language, reportId, instanceRegionCode) {
+  thanks: function(language, reportId, regionName) {
     let response = messages[config.DEFAULT_LANGUAGE].texts.thanks;
     if (language in messages) {
       response = messages[language].texts.thanks + config.MAP_URL +
-        instanceRegionCode + '/' + reportId;
+        regionName + '/?id=' + reportId;
         console.log(response);
     }
     return response;
