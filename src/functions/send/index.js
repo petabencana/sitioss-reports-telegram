@@ -2,6 +2,10 @@ import Telegram from '../../lib/telegram';
 import config from '../../config';
 
 export default (event, context, callback) => {
+  // Log statements
+  console.log('\n\nLoading Notify handler\n\n');
+  console.log('Incoming body: ' + event.body);
+  
   const telegram = new Telegram(config);
 
   const body = event.body;
