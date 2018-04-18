@@ -93,7 +93,9 @@ export default class Telegram {
   sendThanks(properties) {
     const message = this.messages.thanks(properties.language,
       properties.reportId, properties.instanceRegionCode);
+    console.log('message: ', message);
     const request = this._prepareRequest(properties.userId, message);
+    console.log('request: ', request);
     return this._sendMessage(request);
   }
 
