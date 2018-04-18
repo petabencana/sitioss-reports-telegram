@@ -56,7 +56,7 @@ export default class Telegram {
    * sendCard - Method to send report card to Telegram user
    * @method sendCard
    * @param {Object} properties - properties of message to send
-   * @param {String} properties.username - User ID or chat ID to send message to
+   * @param {String} properties.userId - User ID or chat ID to send message to
    * @param {String} properties.language - Language of response
    * @return {Promise} Result of _sendMessage request
    */
@@ -64,7 +64,7 @@ export default class Telegram {
     return new Promise((resolve, reject) => {
       // Get a card id
       this.cards.getCardId({
-        userId: properties.username,
+        userId: properties.userId,
         network: 'telegram',
         language: properties.language,
       }).then((cardId) => {
