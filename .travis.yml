@@ -8,24 +8,22 @@ script:
   - npm run test && npm run coverage
 
 deploy: 
-  provider: lambda
-  function_name: "cognicity-telegram-webhook-dev"
-  region: $AWS_REGION
-  role: $AWS_LAMBDA_ROLE
-  runtime: "nodejs8.10"
-  module_name: "src/functions/receive/index"
-  handler_name: "default"
-  on:
-    branch: dev
-
-deploy: 
-  provider: lambda
-  function_name: "cognicity-telegram-reply-dev"
-  region: $AWS_REGION
-  role: $AWS_LAMBDA_ROLE
-  runtime: "nodejs8.10"
-  module_name: "src/functions/send/index"
-  handler_name: "default"
-  on:
-    branch: dev
+  - provider: lambda
+    function_name: "cognicity-telegram-webhook-dev"
+    region: $AWS_REGION
+    role: $AWS_LAMBDA_ROLE
+    runtime: "nodejs8.10"
+    module_name: "src/functions/receive/index"
+    handler_name: "default"
+    on:
+      branch: dev 
+ -  provider: lambda
+    function_name: "cognicity-telegram-reply-dev"
+    region: $AWS_REGION
+    role: $AWS_LAMBDA_ROLE
+    runtime: "nodejs8.10"
+    module_name: "src/functions/send/index"
+    handler_name: "default"
+    on:
+      branch: dev
 
