@@ -19,7 +19,7 @@ export default (config) => ({
     return response;
   },
   card: function(language, cardId) {
-    let response = messages[language].texts.default;
+    let response = messages[config.DEFAULT_LANGUAGE].texts.card;
     if (language in messages) {
       response = messages[language].texts.card +
         config.CARDS_URL +
@@ -27,10 +27,12 @@ export default (config) => ({
     }
     return response;
   },
-  thanks: function(language, reportId) {
-    let response = messages[language].texts.default;
+  thanks: function(language, reportId, instanceRegionCode) {
+    let response = messages[config.DEFAULT_LANGUAGE].texts.thanks;
     if (language in messages) {
-      response = messages[language].texts.thanks + config.MAP_URL + reportId;
+      response = messages[language].texts.thanks + config.MAP_URL +
+        instanceRegionCode + '/' + reportId;
+        console.log(response);
     }
     return response;
   },

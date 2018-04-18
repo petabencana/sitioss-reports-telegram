@@ -51,7 +51,6 @@ export default function() {
           userId: 'this-is-a-thirty-six-character-strin',
         }
       ).then((res) => {
-        // TODO check whether spaces will work?
         test.value(res).is('https://api.telegram.org/botTOKEN/sendmessage?text=RiskMap bot helps you report flooding in realtime. \n        Send /flood to report. In life-threatening situations call 911.&chat_id=this-is-a-thirty-six-character-strin');
         done();
       });
@@ -73,11 +72,13 @@ export default function() {
       telegram.sendThanks(
         {
           userId: 'this-is-a-thirty-six-character-strin',
-          reportId: 'this-is-a-thirty-six-character-strin',
+          reportId: '1',
           language: 'en',
+          instanceRegionCode: 'jbd',
         }
       ).then((result) => {
-        test.value(result).is('https://api.telegram.org/botTOKEN/sendmessage?text=Thank you for your report. You can access it using this link https://map.cognicity.com/this-is-a-thirty-six-character-strin&chat_id=this-is-a-thirty-six-character-strin');
+        console.log(result);
+        test.value(result).is('https://api.telegram.org/botTOKEN/sendmessage?text=Thank you for your report. You can access it using this link ' + config.MAP_URL + 'jbd/' + '1' + '&chat_id=this-is-a-thirty-six-character-strin');
         done();
       });
     });

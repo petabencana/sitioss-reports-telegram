@@ -71,6 +71,7 @@ export default class Telegram {
         // Build the response
         const message = this.messages.card(properties.language, cardId);
         const request = this._prepareRequest(properties.userId, message);
+        console.log('request', request);
         // Return the promise
         resolve(this._sendMessage(request));
       }).catch((err) => {
@@ -86,11 +87,12 @@ export default class Telegram {
    * @param {String} properties.userId - User ID or chat ID to send message to
    * @param {String} properties.reportId - Report identifier for uniquie link
    * @param {String} properties.language - Language of response
+   * @param {String} properties.instanceRegionCode - CogniCity region code
    * @return {Promise} Result of _sendMessage request
    */
   sendThanks(properties) {
     const message = this.messages.thanks(properties.language,
-      properties.reportId);
+      properties.reportId, properties.instanceRegionCode);
     const request = this._prepareRequest(properties.userId, message);
     return this._sendMessage(request);
   }
