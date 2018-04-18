@@ -98,7 +98,7 @@ export default class Telegram {
       if (region === null) reject(new Error(`Instance region not found`));
       else {
         const message = this.messages.thanks(properties.language,
-          properties.reportId, properties.instanceRegionCode);
+          properties.reportId, region);
         console.log('message: ', message);
         const request = this._prepareRequest(properties.userId, message);
         console.log('request: ', request);
