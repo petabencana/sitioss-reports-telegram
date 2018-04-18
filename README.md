@@ -1,4 +1,4 @@
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+[![Build Status](https://travis-ci.org/urbanriskmap/cognicity-reports-telegram-lambda.svg?branch=dev)](https://travis-ci.org/urbanriskmap/cognicity-reports-telegram-lambda) [![Coverage Status](https://coveralls.io/repos/github/urbanriskmap/cognicity-reports-telegram-lambda/badge.svg?branch=master)](https://coveralls.io/github/urbanriskmap/cognicity-reports-telegram-lambda?branch=master) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) 
 
 # cognicity-reports-telegram-lambda
 
