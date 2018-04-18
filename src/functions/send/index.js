@@ -4,7 +4,7 @@ import config from '../../config';
 export default (event, context, callback) => {
   const telegram = new Telegram(config);
 
-  const body = JSON.parse(event.body);
+  const body = event.body;
 
   const response = {
     statusCode: 200,
