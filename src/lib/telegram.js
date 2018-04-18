@@ -1,5 +1,6 @@
 import axios from 'axios';
 import messages from './messages';
+import regions from './regions';
 import Cards from './cards';
 /**
  * Class for sending CogniCity messages via Telegram
@@ -15,6 +16,7 @@ export default class Telegram {
   constructor(config) {
     this.config = config;
     this.messages = messages(config);
+    this.regions = regions;
     this.cards = new Cards(config);
     this.axios = axios;
   }
@@ -91,12 +93,18 @@ export default class Telegram {
    * @return {Promise} Result of _sendMessage request
    */
   sendThanks(properties) {
-    const message = this.messages.thanks(properties.language,
-      properties.reportId, properties.instanceRegionCode);
-    console.log('message: ', message);
-    const request = this._prepareRequest(properties.userId, message);
-    console.log('request: ', request);
-    return this._sendMessage(request);
+    return new Promise((resolve, reject) =>{
+      const region = this.regions(properties.instanceRegionCode);
+      if (region === null) reject(new Error(`Instance region not found`));
+      else {
+        const message = this.messages.thanks(properties.language,
+          properties.reportId, properties.instanceRegionCode);
+        console.log('message: ', message);
+        const request = this._prepareRequest(properties.userId, message);
+        console.log('request: ', request);
+        resolve(this._sendMessage(request));
+      }
+    });
   }
 
   /**

@@ -160,6 +160,20 @@ export default function() {
       });
   });
 
+  it('catches error with region code', function(done) {
+    telegram.sendThanks(
+      {
+        userId: 'this-is-a-thirty-six-character-strin',
+        reportId: '1',
+        language: 'en',
+        instanceRegionCode: 'err',
+      }
+    ).catch((err) => {
+      test.value(err.message).is('Instance region not found');
+      done();
+    });
+  });
+
   after(function() {
     telegram.axios = oldAxios;
     telegram.cards = oldCards;
