@@ -17,7 +17,7 @@ This module deploys two AWS lambda functions:
 - CogniCity:
     * This function is designed to work with Cognicity Server v3.0.6 or later, running CogniCity Schema v3.0.7 or later.
 - Node:
-    * v8.10 or later
+    * v8.10 or later (ES6 syntax is transpiled using Babel)
 
 ### Getting started
 * Create Telegram bot as explained [here](https://core.telegram.org/bots#creating-a-new-bot) and get `BOT_TOKEN` [here](https://core.telegram.org/bots#generating-an-authorization-token). Configure its About, Description, Commands, Profile picture but hold off on setting up Webhooks until you have configured the webhook.

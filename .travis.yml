@@ -7,13 +7,16 @@ install: npm install
 script:
   - npm run test && npm run coverage
 
+before_deploy:
+  - npm run build
+
 deploy: 
   - provider: lambda
     function_name: "cognicity-telegram-webhook-dev"
     region: $AWS_REGION
     role: $AWS_LAMBDA_ROLE
     runtime: "nodejs8.10"
-    module_name: "src/functions/receive/index"
+    module_name: "bin/functions/receive/index"
     handler_name: "default"
     on:
       branch: dev 
@@ -22,7 +25,7 @@ deploy:
     region: $AWS_REGION
     role: $AWS_LAMBDA_ROLE
     runtime: "nodejs8.10"
-    module_name: "src/functions/send/index"
+    module_name: "bin/functions/send/index"
     handler_name: "default"
     on:
       branch: dev
