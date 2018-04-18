@@ -78,7 +78,7 @@ export default function() {
         }
       ).then((result) => {
         console.log(result);
-        test.value(result).is('https://api.telegram.org/botTOKEN/sendmessage?text=Thank you for your report. You can access it using this link ' + config.MAP_URL + 'jbd/' + '1' + '&chat_id=this-is-a-thirty-six-character-strin');
+        test.value(result).is('https://api.telegram.org/botTOKEN/sendmessage?text=Thank you for your report. You can access it using this link ' + config.MAP_URL + 'jakarta/?id=' + '1' + '&chat_id=this-is-a-thirty-six-character-strin');
         done();
       });
     });
