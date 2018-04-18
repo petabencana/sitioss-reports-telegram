@@ -1,3 +1,5 @@
+// Set a Telegram bot webhook
+// Run: npx babel-node commands/setWebhook.js
 import axios from 'axios';
 require('dotenv').config();
 import config from '../src/config';
