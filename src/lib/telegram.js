@@ -64,6 +64,7 @@ export default class Telegram {
   **/
   _sendMessage(requestString) {
     return new Promise((resolve, reject) => {
+      console.log('Sending request to telegram: ' + requestString);
       this.axios.post(requestString, {})
         .then((response) => resolve(response))
         .catch((err) => reject(err));
