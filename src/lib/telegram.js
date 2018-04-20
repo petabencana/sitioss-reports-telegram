@@ -100,6 +100,7 @@ export default class Telegram {
       const properties = {
         userId: String(telegramMessage.chat.id),
         language: this.config.DEFAULT_LANGUAGE,
+        network: 'telegram'
       };
       if (this._classify(telegramMessage.text) === 'flood') {
         this.bot.card(properties)
