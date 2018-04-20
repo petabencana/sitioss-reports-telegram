@@ -105,12 +105,14 @@ export default class Telegram {
         this.bot.card(properties)
         .then((msg) => {
           const response = this._prepareRequest(properties.userId, msg);
+          console.log('response to send to telegram: ', response);
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
       } else {
         this.bot.default(properties)
         .then((msg) => {
           const response = this._prepareRequest(properties.userId, msg);
+          console.log('response to send to telegram: ', response);
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
       }
