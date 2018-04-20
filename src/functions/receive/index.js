@@ -25,7 +25,6 @@ const error = {
  */
 export default (event, context, callback) => {
       console.log('Lambda handler loading')
-      console.log('Incoming payload: ', event.message)
       console.log('Incoming payload: ', event.body)
 
       // Send telegram a reply immediately to stop multiple messages to user.
@@ -33,7 +32,10 @@ export default (event, context, callback) => {
 
       const telegram = new Telegram(config);
 
-      telegram.process(JSON.parse(event.body))
+      // Get Lambda data
+      const paypload = JSON.parse(event.body);
+      // Pass telegram message for processing
+      telegram.process(payload.message)
         .then((res) => {
           console.log('Reply sent to user');
         })
