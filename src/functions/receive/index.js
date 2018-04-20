@@ -33,7 +33,7 @@ export default (event, context, callback) => {
       const telegram = new Telegram(config);
 
       // Get Lambda data
-      const paypload = JSON.parse(event.body);
+      const payload = JSON.parse(event.body);
       // Pass telegram message for processing
       telegram.process(payload.message)
         .then((res) => {
