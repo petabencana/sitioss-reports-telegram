@@ -1,7 +1,7 @@
 // Function for sending Telegram messages
 // import Receive from './receive';
 import config from '../../config';
-import Telegram from '../lib/telegram';
+import Telegram from '../../lib/telegram';
 
 const response = {
   statusCode: 200,
