@@ -9,6 +9,7 @@ script:
 
 before_deploy:
   - npm run build
+  - cp src/lib/messages.json bin/lib/messages.json
 
 deploy: 
   - provider: lambda
@@ -16,7 +17,7 @@ deploy:
     region: $AWS_REGION
     role: $AWS_LAMBDA_ROLE
     runtime: "nodejs8.10"
-    module_name: "bin/functions/receive"
+    module_name: "./bin/functions/receive"
     handler_name: "default"
     on:
       branch: dev 
@@ -25,7 +26,7 @@ deploy:
     region: $AWS_REGION
     role: $AWS_LAMBDA_ROLE
     runtime: "nodejs8.10"
-    module_name: "bin/functions/send"
+    module_name: "./bin/functions/send"
     handler_name: "default"
     on:
       branch: dev
