@@ -1,7 +1,8 @@
 import axios from 'axios';
-import messages from './messages';
-import regions from './regions';
-import Cards from './cards';
+import Bot from '@urbanriskmap/cognicity-bot-core';
+import messages from './messages.json';
+
+// language.
 /**
  * Class for sending CogniCity messages via Telegram
  * @class Telegram
@@ -15,10 +16,19 @@ export default class Telegram {
    */
   constructor(config) {
     this.config = config;
-    this.messages = messages(config);
-    this.regions = regions;
-    this.cards = new Cards(config);
+    this.config.MESSAGES = messages;
+    this.bot = new Bot(this.config);
     this.axios = axios;
+  }
+
+  _classify(text) {
+    // filter the message by keyword
+    const re = new RegExp(/\/flood/gi);
+    if (re.exec(text) !== null) {
+      return 'flood';
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -39,13 +49,6 @@ export default class Telegram {
           );
   }
 
-  /**
-   * Sends a Telegram message
-   * @method _sendMessage
-   * @private
-   * @param {String} requestString - URI for Telegram API
-   * @return {Promise} - Result of post request
-   */
   _sendMessage(requestString) {
     return new Promise((resolve, reject) => {
       this.axios.post(requestString, {})
@@ -54,70 +57,35 @@ export default class Telegram {
     });
   }
 
-  /**
-   * sendCard - Method to send report card to Telegram user
-   * @method sendCard
-   * @param {Object} properties - properties of message to send
-   * @param {String} properties.userId - User ID or chat ID to send message to
-   * @param {String} properties.language - Language of response
-   * @return {Promise} Result of _sendMessage request
-   */
-  sendCard(properties) {
+  sendThanks(httpBody) {
     return new Promise((resolve, reject) => {
-      // Get a card id
-      this.cards.getCardId({
-        userId: properties.userId,
-        network: 'telegram',
-        language: properties.language,
-      }).then((cardId) => {
-        // Build the response
-        const message = this.messages.card(properties.language, cardId);
-        const request = this._prepareRequest(properties.userId, message);
-        console.log('request', request);
-        // Return the promise
-        resolve(this._sendMessage(request));
-      }).catch((err) => {
-        reject(err);
-        });
+      this.bot.thanks(httpBody)
+        .then((msg) => {
+          const response = this._prepareRequest(httpBody.userId, msg);
+          resolve(this._sendMessage(response));
+        }).catch((err) => reject(err));
     });
   }
 
-  /**
-   * sendThanks - Method to send report link to Telegram user
-   * @method sendThanks
-   * @param {Object} properties - properties of message to send
-   * @param {String} properties.userId - User ID or chat ID to send message to
-   * @param {String} properties.reportId - Report identifier for uniquie link
-   * @param {String} properties.language - Language of response
-   * @param {String} properties.instanceRegionCode - CogniCity region code
-   * @return {Promise} Result of _sendMessage request
-   */
-  sendThanks(properties) {
-    return new Promise((resolve, reject) =>{
-      const region = this.regions(properties.instanceRegionCode);
-      if (region === null) reject(new Error(`Instance region not found`));
-      else {
-        const message = this.messages.thanks(properties.language,
-          properties.reportId, region);
-        console.log('message: ', message);
-        const request = this._prepareRequest(properties.userId, message);
-        console.log('request: ', request);
-        resolve(this._sendMessage(request));
+  process(telegramMessage) {
+    return new Promise((resolve, reject) => {
+      const properties = {
+        userId: String(telegramMessage.chat.id),
+        language: this.config.DEFAULT_LANGUAGE,
+      };
+      if (this._classify(telegramMessage.text) === 'flood') {
+        this.bot.cards(properties)
+        .then((msg) => {
+          const response = this._prepareRequest(properties.userId, msg);
+          resolve(this._sendMessage(response));
+        }).catch((err) => reject(err));
+      } else {
+        this.bot.default(properties)
+        .then((msg) => {
+          const response = this._prepareRequest(properties.userId, msg);
+          resolve(this._sendMessage(response));
+        }).catch((err) => reject(err));
       }
     });
-  }
-
-  /**
-   * sendDefault - Method to send default message Telegram user
-   * @method sendDefault
-   * @param {Object} properties - properties of message to send
-   * @param {String} properties.userId - User ID or chat ID to send message to
-   * @param {String} properties.language - Language of response
-   * @return {Promise} Result of _sendMessage request
-   */
-  sendDefault(properties) {
-    const message = this.messages.default(properties.language);
-    const request = this._prepareRequest(properties.userId, message);
-    return this._sendMessage(request);
   }
 }

@@ -1,9 +1,20 @@
-// Config
-require('dotenv').config();
-
 // Function for sending Telegram messages
-import Receive from './receive';
+// import Receive from './receive';
 import config from '../../config';
+import Telegram from '../lib/telegram';
+
+const response = {
+  statusCode: 200,
+  headers: {},
+  body: JSON.stringify({}),
+};
+
+const error = {
+  statusCode: 500,
+  headers: {},
+  body: JSON.stringify({message: 'Error with chatbot'}),
+};
+
 
 /**
  * Webhook handler for incoming Telegram messages
@@ -13,21 +24,17 @@ import config from '../../config';
  * @param {Function} callback - Callback
  */
 export default (event, context, callback) => {
-      const response = {
-        statusCode: 200,
-        headers: {},
-        body: JSON.stringify({}),
-      };
       // Send telegram a reply immediately to stop multiple messages to user.
       callback(null, response);
 
-      const receive = new Receive(config);
-      receive.process(JSON.parse(event.body))
+      const telegram = new Telegram(config);
+
+      telegram.process(JSON.parse(event.body))
         .then((res) => {
           console.log('Reply sent to user');
         })
         .catch((err) => {
           console.log('Error in Telegram reply. ' + err);
-          callback(null);
+          callback(null, error);
         });
 };
