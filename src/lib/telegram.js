@@ -2,7 +2,6 @@ import axios from 'axios';
 import Bot from '@urbanriskmap/cognicity-bot-core';
 import messages from './messages.json';
 
-// language.
 /**
  * Class for sending CogniCity messages via Telegram
  * @class Telegram
@@ -21,6 +20,13 @@ export default class Telegram {
     this.axios = axios;
   }
 
+  /**
+   * Method to filter text by keyword
+   * @method _classify
+   * @private
+   * @param {String} text - message from user
+   * @return {String} - keyword or null
+   */
   _classify(text) {
     // filter the message by keyword
     const re = new RegExp(/\/flood/gi);
@@ -49,6 +55,13 @@ export default class Telegram {
           );
   }
 
+  /**
+    * Send Telegram message
+    * @method _prepareRequest
+    * @private
+    * @param {String} requestString - Telegram call
+    * @return {Promise} - Result of request
+  **/
   _sendMessage(requestString) {
     return new Promise((resolve, reject) => {
       this.axios.post(requestString, {})
@@ -57,16 +70,30 @@ export default class Telegram {
     });
   }
 
-  sendThanks(httpBody) {
+   // TODO - document body properties
+  /**
+    * Prepare and send a thank you message to user with report ID
+    * @method sendThanks
+    * @param {Object} body - HTTP body request object
+    * @return {Promise} - Result of request
+  **/
+  sendThanks(body) {
     return new Promise((resolve, reject) => {
-      this.bot.thanks(httpBody)
+      this.bot.thanks(body)
         .then((msg) => {
-          const response = this._prepareRequest(httpBody.userId, msg);
+          const response = this._prepareRequest(body.userId, msg);
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
     });
   }
 
+   // TODO - document telegramMessage properties
+  /**
+    * Respond telegram to user based on input
+    * @method process
+    * @param {Object} telegramMessage - Telegram requets object
+    * @return {Promise} - Result of request
+  **/
   process(telegramMessage) {
     return new Promise((resolve, reject) => {
       const properties = {
