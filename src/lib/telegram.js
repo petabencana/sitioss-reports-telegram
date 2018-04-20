@@ -101,7 +101,7 @@ export default class Telegram {
         language: this.config.DEFAULT_LANGUAGE,
       };
       if (this._classify(telegramMessage.text) === 'flood') {
-        this.bot.cards(properties)
+        this.bot.card(properties)
         .then((msg) => {
           const response = this._prepareRequest(properties.userId, msg);
           resolve(this._sendMessage(response));

@@ -57,7 +57,7 @@ export default function() {
 
       telegram.bot = {
         default: mockDefault,
-        cards: mockCard,
+        card: mockCard,
         thanks: mockThanks,
       };
 

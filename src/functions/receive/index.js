@@ -24,8 +24,8 @@ const error = {
  * @param {Function} callback - Callback
  */
 export default (event, context, callback) => {
-      console.log('Lambda handler loading')
-      console.log('Incoming payload: ', event.body)
+      console.log('Lambda handler loading');
+      console.log('Incoming payload: ', event.body);
 
       // Send telegram a reply immediately to stop multiple messages to user.
       callback(null, response);
