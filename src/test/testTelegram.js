@@ -108,7 +108,7 @@ export default function() {
         },
         text: '/flood',
       };
-      telegram.process(message)
+      telegram.sendReply(message)
         .then((res) => {
           test.value(res).is('https://api.telegram.org/bot' + config.BOT_TOKEN + '/sendmessage?text=mocked card message&chat_id=1');
           done();
@@ -123,7 +123,7 @@ export default function() {
         text: '/flood',
       };
       axiosError = true;
-      telegram.process(message)
+      telegram.sendReply(message)
         .catch((err) => {
           test.value(err.message).is('Axios error');
           axiosError = false;
@@ -138,7 +138,7 @@ export default function() {
         },
         text: 'spam',
       };
-      telegram.process(message)
+      telegram.sendReply(message)
         .then((res) => {
           test.value(res).is('https://api.telegram.org/bot' + config.BOT_TOKEN + '/sendmessage?text=mocked default message&chat_id=1');
           done();
@@ -153,7 +153,7 @@ export default function() {
         text: 'spam',
       };
       botError = true;
-      telegram.process(message)
+      telegram.sendReply(message)
         .catch((err) => {
           test.value(err.message).is('bot error');
           done();
@@ -168,7 +168,7 @@ export default function() {
         text: '/flood',
       };
       botError = true;
-      telegram.process(message)
+      telegram.sendReply(message)
         .catch((err) => {
           test.value(err.message).is('bot error');
           done();

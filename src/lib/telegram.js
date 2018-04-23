@@ -91,29 +91,27 @@ export default class Telegram {
    // TODO - document telegramMessage properties
   /**
     * Respond telegram to user based on input
-    * @method process
+    * @method sendReply
     * @param {Object} telegramMessage - Telegram requets object
     * @return {Promise} - Result of request
   **/
-  process(telegramMessage) {
+  sendReply(telegramMessage) {
     return new Promise((resolve, reject) => {
       const properties = {
         userId: String(telegramMessage.chat.id),
         language: this.config.DEFAULT_LANGUAGE,
-        network: 'telegram'
+        network: 'telegram',
       };
       if (this._classify(telegramMessage.text) === 'flood') {
         this.bot.card(properties)
         .then((msg) => {
           const response = this._prepareRequest(properties.userId, msg);
-          console.log('response to send to telegram: ', response);
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
       } else {
         this.bot.default(properties)
         .then((msg) => {
           const response = this._prepareRequest(properties.userId, msg);
-          console.log('response to send to telegram: ', response);
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
       }

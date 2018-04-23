@@ -35,7 +35,7 @@ export default (event, context, callback) => {
       // Get Lambda data
       const payload = JSON.parse(event.body);
       // Pass telegram message for processing
-      telegram.process(payload.message)
+      telegram.sendReply(payload.message)
         .then((res) => {
           console.log('Reply sent to user');
         })
