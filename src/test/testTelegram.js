@@ -18,7 +18,7 @@ export default function() {
       const mockThanks = function(properties) {
         return new Promise((resolve, reject) => {
           if (botError === false) {
-            resolve('mocked thanks message');
+            resolve({text: 'mocked thanks message', link: ' link'});
           } else {
             reject(new Error(`bot error`));
           }
@@ -28,7 +28,7 @@ export default function() {
       const mockDefault = function(properties) {
         return new Promise((resolve, reject) => {
           if (botError === false) {
-            resolve('mocked default message');
+            resolve({text: 'mocked default message'});
           } else {
             reject(new Error(`bot error`));
           }
@@ -38,7 +38,7 @@ export default function() {
       const mockCard = function(properties) {
         return new Promise((resolve, reject) => {
           if (botError === false) {
-            resolve('mocked card message');
+            resolve({text: 'mocked card message', link: ' card'});
           } else {
             reject(new Error(`bot error`));
           }
@@ -80,7 +80,7 @@ export default function() {
       };
       telegram.sendThanks(body)
         .then((res) => {
-          test.value(res).is('https://api.telegram.org/bot' + config.BOT_TOKEN + '/sendmessage?text=mocked thanks message&chat_id=1');
+          test.value(res).is('https://api.telegram.org/bot' + config.BOT_TOKEN + '/sendmessage?text=mocked thanks message link&chat_id=1');
           done();
         });
     });
@@ -110,7 +110,7 @@ export default function() {
       };
       telegram.sendReply(message)
         .then((res) => {
-          test.value(res).is('https://api.telegram.org/bot' + config.BOT_TOKEN + '/sendmessage?text=mocked card message&chat_id=1');
+          test.value(res).is('https://api.telegram.org/bot' + config.BOT_TOKEN + '/sendmessage?text=mocked card message card&chat_id=1');
           done();
         });
     });

@@ -38,26 +38,45 @@ export default class Telegram {
   }
 
   /**
-    * Prepares Telegram message request object
-    * @method _prepareRequest
+    * Prepares Telegram message + link request object
+    * @method _prepareResponse
     * @private
     * @param {String} userId - User or Telegram chat ID for reply
-    * @param {String} message - Message to send
+    * @param {Object} message - Bot message object
     * @return {String} - URI for request
   **/
-  _prepareRequest(userId, message) {
+  _prepareLinkResponse(userId, message) {
     return (this.config.TELEGRAM_ENDPOINT +
             this.config.BOT_TOKEN +
             '/sendmessage?text=' +
-            message +
+            message.text +
+            message.link +
             '&chat_id=' +
             userId
           );
   }
 
+    /**
+    * Prepares default Telegram message request object
+    * @method _prepareDefaultResponse
+    * @private
+    * @param {String} userId - User or Telegram chat ID for reply
+    * @param {Object} message - Bot message object
+    * @return {String} - URI for request
+  **/
+ _prepareDefaultResponse(userId, message) {
+  return (this.config.TELEGRAM_ENDPOINT +
+          this.config.BOT_TOKEN +
+          '/sendmessage?text=' +
+          message.text +
+          '&chat_id=' +
+          userId
+        );
+}
+
   /**
     * Send Telegram message
-    * @method _prepareRequest
+    * @method _sendMessage
     * @private
     * @param {String} requestString - Telegram call
     * @return {Promise} - Result of request
@@ -82,7 +101,7 @@ export default class Telegram {
     return new Promise((resolve, reject) => {
       this.bot.thanks(body)
         .then((msg) => {
-          const response = this._prepareRequest(body.userId, msg);
+          const response = this._prepareLinkResponse(body.userId, msg);
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
     });
@@ -105,13 +124,13 @@ export default class Telegram {
       if (this._classify(telegramMessage.text) === 'flood') {
         this.bot.card(properties)
         .then((msg) => {
-          const response = this._prepareRequest(properties.userId, msg);
+          const response = this._prepareLinkResponse(properties.userId, msg);
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
       } else {
         this.bot.default(properties)
         .then((msg) => {
-          const response = this._prepareRequest(properties.userId, msg);
+          const response = this._prepareDefaultResponse(properties.userId, msg);
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
       }
