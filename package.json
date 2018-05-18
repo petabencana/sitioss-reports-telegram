@@ -1,25 +1,49 @@
 {
   "name": "cognicity-reports-telegram-lambda",
-  "version": "1.0.0",
-  "description": "A serverless Telegram chatbot which will send one time card links and report notifications",
-  "main": "handler.js",
+  "version": "0.0.9",
+  "description": "Telegram chatbot running on AWS lambda",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --fix src",
+    "mocha": "nyc mocha --compilers js:babel-core/register src/test/index",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test": "npm run lint && npm run mocha",
+    "build": "./node_modules/.bin/babel src -d bin && cp src/lib/messages.json bin/lib/messages.json"
   },
+  "keywords": [
+    "bot",
+    "telegram",
+    "telegrambot"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/urbanriskmap/cognicity-reports-telegram-lambda.git"
   },
   "author": "Maanasa Priyaa",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/urbanriskmap/cognicity-reports-telegram-lambda/issues"
   },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
+    "@urbanriskmap/cognicity-bot-core": "1.0.2",
+    "axios": "^0.18.0",
     "dotenv": "^4.0.0",
-    "request": "^2.80.0",
+    "joi": "^13.1.2",
+    "mocha-lcov-reporter": "^1.3.0",
+    "request": "^2.81.0",
     "telegraf": "^3.6.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-istanbul": "^4.1.6",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "coveralls": "^2.13.3",
+    "eslint": "^4.6.1",
+    "eslint-config-google": "^0.9.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.5.3",
+    "nyc": "^11.6.0",
+    "unit.js": "^2.0.0"
   }
 }

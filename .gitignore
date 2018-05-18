@@ -41,3 +41,8 @@ jspm_packages
 
 # Env files
 .env
+
+# OSX system
+.DS_Store
+bin
+private
