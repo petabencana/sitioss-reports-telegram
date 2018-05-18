@@ -6,11 +6,11 @@ import {handleResponse} from '../../lib/util';
 import Telegram from '../../lib/telegram';
 
 const _bodySchema = Joi.object().keys({
-  userId: Joi.number(),
+  userId: Joi.string(),
   instanceRegionCode: Joi.string(),
   language: Joi.string(),
   network: Joi.string(),
-  reportId: Joi.string(),
+  reportId: Joi.number(),
 });
 
 /**
