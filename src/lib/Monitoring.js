@@ -24,11 +24,16 @@ export default class Monitoring {
     send() {
         const endpoint = this.config.ENDPOINT_SEND;
         return new Promise((resolve, reject) => {
-            this.axios.post(endpoint, {body: {}})
-                .then((response) => {
-                    reject(new Error(
-                        'Expecting 400 response, recieve 200 from ' +
-                        endpoint));
+            this.axios.post(endpoint, {body: {}},
+                {
+                    headers: {
+                        'x-api-key': this.config.API_KEY,
+                    },
+                }
+            ).then((response) => {
+                reject(new Error(
+                    'Expecting 400 response, recieve 200 from ' +
+                    endpoint));
                 }).catch((err) => {
                 // Expecting 400
                 if (err.response.data.statusCode === 400) {
@@ -49,7 +54,7 @@ export default class Monitoring {
     }
 
     /**
-     * Verify get receive endpoint working
+     * Verify get receive webhook endpoint working
      * @function receive
      * @return {Promise} - Result of request
      */

@@ -1,6 +1,7 @@
 require('dotenv').config({silent: true});
 
 export default {
+    API_KEY: process.env.API_KEY,
     API_GW_WEBHOOK: process.env.API_GW_WEBHOOK,
     BOT_TOKEN: process.env.BOT_TOKEN,
     ENDPOINT_SEND: process.env.ENDPOINT_SEND,
