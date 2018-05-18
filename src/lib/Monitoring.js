@@ -56,23 +56,11 @@ export default class Monitoring {
         return new Promise((resolve, reject) => {
             this.axios.post(endpoint, {body: 'string'})
                 .then((response) => {
-                    reject(new Error(
-                        'Expecting 400 response, recieve 200 from ' +
-                        endpoint));
+                    resolve('Received 200 response from ' + endpoint);
                 }).catch((err) => {
-                // Expecting 400
-                if (err.response.data.statusCode === 400) {
-                    console.log('Received correct 400 response from ' +
-                    endpoint);
-                    resolve('Receive correct 400 response from ' +
-                    endpoint);
-                } else {
-                    console.log('Receive incorrect response from ' +
-                    endpoint);
-                    reject(new Error('Received incorrect response from ' +
-                    endpoint));
-                }
-            });
+                    reject(new Error('Receive incorrect response from ' +
+                        endpoint));
+                });
         });
     }
 }

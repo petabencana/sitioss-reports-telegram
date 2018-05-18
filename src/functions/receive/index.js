@@ -30,10 +30,13 @@ export default async (event, context, callback) => {
     console.log('Message sent');
   } catch (err) {
     if (err.isJoi) {
-      handleResponse(callback, 400, err.details[0].message);
+      // tell Telegram to ingore errors, but stop process
+      handleResponse(callback, 200, {});
       console.log('Validation error: ' + err.details[0].message);
     } else {
-      handleResponse(callback, 500, err.message);
+      // tell Telegram to ignore errors, but stop process
+      console.log('Error ' + err.message);
+      handleResponse(callback, 200, {});
     }
   }
 };
