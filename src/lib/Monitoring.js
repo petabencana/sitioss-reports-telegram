@@ -63,7 +63,7 @@ export default class Monitoring {
         return new Promise((resolve, reject) => {
             this.axios.post(endpoint, {body: 'string'})
                 .then((response) => {
-                    resolve('Received 200 response from ' + endpoint);
+                    resolve('Received correct 200 response from ' + endpoint);
                 }).catch((err) => {
                     console.log(err);
                     reject(new Error('Receive incorrect response from ' +
