@@ -21,22 +21,28 @@ export default class Monitoring {
      * @function send
      * @return {Promise} - Result of request
      */
-    send(){
+    send() {
         const endpoint = this.config.ENDPOINT_SEND;
         return new Promise((resolve, reject) => {
-            this.axios.post(endpoint, {body:{}})
+            this.axios.post(endpoint, {body: {}})
                 .then((response) => {
-                    reject(new Error('Expecting 400 response, recieve 200 from ' + endpoint));
+                    reject(new Error(
+                        'Expecting 400 response, recieve 200 from ' +
+                        endpoint));
                 }).catch((err) => {
                 // Expecting 400
-                if (err.response.data.statusCode === 400){
-                    console.log('Received correct 400 response from ' + endpoint);
-                    resolve('Receive correct 400 response from ' + endpoint);
+                if (err.response.data.statusCode === 400) {
+                    console.log('Received correct 400 response from ' +
+                    endpoint);
+                    resolve('Receive correct 400 response from ' +
+                    endpoint);
                 } else {
-                    console.log('Receive incorrect response from ' + endpoint);
-                    reject(new Error('Received incorrect response from ' + endoint));
+                    console.log('Receive incorrect response from ' +
+                    endpoint);
+                    reject(new Error('Received incorrect response from ' +
+                    endpoint));
                 }
-            })
+            });
         });
     }
 
@@ -45,22 +51,28 @@ export default class Monitoring {
      * @function receive
      * @return {Promise} - Result of request
      */
-    receive(){
+    receive() {
         const endpoint = this.config.ENDPOINT_RECEIVE;
         return new Promise((resolve, reject) => {
-            this.axios.post(endpoint, {body:'string'})
+            this.axios.post(endpoint, {body: 'string'})
                 .then((response) => {
-                    reject(new Error('Expecting 400 response, recieve 200 from ' + endpoint));
+                    reject(new Error(
+                        'Expecting 400 response, recieve 200 from ' +
+                        endpoint));
                 }).catch((err) => {
                 // Expecting 400
-                if (err.response.data.statusCode === 400){
-                    console.log('Received correct 400 response from ' + endpoint);
-                    resolve('Receive correct 400 response from ' + endpoint);
+                if (err.response.data.statusCode === 400) {
+                    console.log('Received correct 400 response from ' +
+                    endpoint);
+                    resolve('Receive correct 400 response from ' +
+                    endpoint);
                 } else {
-                    console.log('Receive incorrect response from ' + endpoint);
-                    reject(new Error('Received incorrect response from ' + endoint));
+                    console.log('Receive incorrect response from ' +
+                    endpoint);
+                    reject(new Error('Received incorrect response from ' +
+                    endpoint));
                 }
-            })
+            });
         });
     }
 }
