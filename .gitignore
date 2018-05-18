@@ -46,3 +46,4 @@ jspm_packages
 .DS_Store
 bin
 private
+.env-dev

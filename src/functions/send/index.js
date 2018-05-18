@@ -1,13 +1,21 @@
-import Telegram from '../../lib/telegram';
-import config from '../../config';
+import Joi from 'joi'; // validation
 
-export default (event, context, callback) => {
+// Local objects
+import config from '../../config';
+import Telegram from '../../lib/telegram';
+
+const _bodySchema = Joi.object().keys({
+  userId: Joi.number(),
+  instanceRegionCode: Joi.string(),
+});
+
+export default async (event, context, callback) => {
   // Log statements
   console.log('\n\nLoading Notify handler\n\n');
   console.log('Incoming body: ' + event.body);
   const telegram = new Telegram(config);
 
-  const body = JSON.parse(event.body);
+  const body = await Joi.validate(event.body, _bodySchema);
 
   const response = {
     statusCode: 200,
