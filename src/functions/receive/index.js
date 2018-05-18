@@ -25,7 +25,7 @@ export default async (event, context, callback) => {
     const telegram = new Telegram(config);
 
     // Send reply message
-    const result = await telegram.sendReply(payload.message);
+    await telegram.sendReply(payload.message);
     handleResponse(callback, 200, {});
     console.log('Message sent');
   } catch (err) {
