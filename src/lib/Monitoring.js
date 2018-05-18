@@ -42,6 +42,7 @@ export default class Monitoring {
                     reject(new Error('Received incorrect response from ' +
                     endpoint));
                 }
+                reject(err); // catch all
             });
         });
     }
