@@ -42,6 +42,7 @@ export default class Monitoring {
                     reject(new Error('Received incorrect response from ' +
                     endpoint));
                 }
+                console.log(err);
                 reject(err); // catch all
             });
         });
@@ -59,6 +60,7 @@ export default class Monitoring {
                 .then((response) => {
                     resolve('Received 200 response from ' + endpoint);
                 }).catch((err) => {
+                    console.log(err);
                     reject(new Error('Receive incorrect response from ' +
                         endpoint));
                 });
