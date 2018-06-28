@@ -34,6 +34,7 @@ export default async (event, context, callback) => {
 
     // Send message
     const result = await telegram.sendThanks(body);
+    console.log(result);
     handleResponse(callback, 200, result);
     console.log('Message sent');
   } catch (err) {
@@ -41,6 +42,7 @@ export default async (event, context, callback) => {
         handleResponse(callback, 400, err.details[0].message);
         console.log('Validation error: ' + err.details[0].message);
       } else {
+        console.log('Error sending messge', err.message);
         handleResponse(callback, 500, err.message);
       }
   }
