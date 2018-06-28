@@ -40,10 +40,10 @@ jspm_packages
 .serverless
 
 # Env files
-.env
+.env**
 
 # OSX system
 .DS_Store
 bin
 private
-.env-dev
+
