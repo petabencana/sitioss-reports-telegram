@@ -85,6 +85,20 @@ export default function() {
         });
     });
 
+    it('Can get thanks - when instanceRegionCode null', function(done) {
+      const body = {
+        language: 'en',
+        instanceRegionCode: 'null',
+        reportId: '1',
+        userId: '1',
+      };
+      telegram.sendThanks(body)
+        .then((res) => {
+          test.value(res).is('https://api.telegram.org/bot' + config.BOT_TOKEN + '/sendmessage?text=mocked thanks message link&chat_id=1');
+          done();
+        });
+    });
+
     it('Can catch bot error with thanks messsage', function(done) {
       const body = {
         language: 'en',
