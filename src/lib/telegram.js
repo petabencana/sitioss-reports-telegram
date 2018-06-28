@@ -99,9 +99,13 @@ export default class Telegram {
   **/
   sendThanks(body) {
     return new Promise((resolve, reject) => {
+      console.log(body);
+      console.log(body.instanceRegionCode);
       if (body.instanceRegionCode === 'null') {
         // catch reports outside the reporting area and reply a default
         body.instanceRegionCode = this.config.DEFAULT_INSTANCE_REGION_CODE;
+        console.log(body);
+        console.log(body.instanceRegionCode);
       }
       this.bot.thanks(body)
         .then((msg) => {
