@@ -11,40 +11,74 @@ before_deploy:
   - npm run build
 
 deploy: 
+  # US Dev Webhook
   - provider: lambda
     function_name: "cognicity-telegram-webhook-dev"
-    region: $AWS_REGION
+    region: $AWS_REGION_US
     role: $AWS_LAMBDA_ROLE
     runtime: "nodejs8.10"
     module_name: "bin/functions/receive"
     handler_name: "default"
     on:
       branch: dev 
+  # US Dev Replies
   - provider: lambda
     function_name: "cognicity-telegram-reply-dev"
-    region: $AWS_REGION
+    region: $AWS_REGION_US
     role: $AWS_LAMBDA_ROLE
     runtime: "nodejs8.10"
     module_name: "bin/functions/send"
     handler_name: "default"
     on:
       branch: dev
+  # US Dev Experimental monitoring functions
+  - provider: lambda
+    function_name: "cognicity-telegram-monitoring-dev"
+    region: $AWS_REGION_US
+    role: $AWS_LAMBDA_ROLE
+    runtime: "nodejs8.10"
+    module_name: "bin/functions/monitoring"
+    handler_name: "default"
+    on:
+      branch: dev
+  # US Prod Webhook
   - provider: lambda
     function_name: "cognicity-telegram-webhook-prod"
-    region: $AWS_REGION
+    region: $AWS_REGION_US
     role: $AWS_LAMBDA_ROLE
     runtime: "nodejs8.10"
     module_name: "bin/functions/receive"
     handler_name: "default"
     on:
-      branch: master 
+      branch: master
+  # US Prod replies 
   - provider: lambda
     function_name: "cognicity-telegram-reply-prod"
-    region: $AWS_REGION
+    region: $AWS_REGION_US
     role: $AWS_LAMBDA_ROLE
     runtime: "nodejs8.10"
     module_name: "bin/functions/send"
     handler_name: "default"
     on:
       branch: master
+  # IN Dev Webhook
+  - provider: lambda
+    function_name: "cognicity-telegram-webhook-dev"
+    region: $AWS_REGION_IN
+    role: $AWS_LAMBDA_ROLE
+    runtime: "nodejs8.10"
+    module_name: "bin/functions/receive"
+    handler_name: "default"
+    on:
+      branch: dev 
+  # IN Dev Replies
+  - provider: lambda
+    function_name: "cognicity-telegram-reply-dev"
+    region: $AWS_REGION_IN
+    role: $AWS_LAMBDA_ROLE
+    runtime: "nodejs8.10"
+    module_name: "bin/functions/send"
+    handler_name: "default"
+    on:
+      branch: dev
 

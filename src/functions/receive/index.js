@@ -1,20 +1,11 @@
-// Function for sending Telegram messages
-// import Receive from './receive';
+import Joi from 'joi'; // validation
+
+// Local objects
 import config from '../../config';
+import {handleResponse} from '../../lib/util';
 import Telegram from '../../lib/telegram';
 
-const response = {
-  statusCode: 200,
-  headers: {},
-  body: JSON.stringify({}),
-};
-
-const error = {
-  statusCode: 500,
-  headers: {},
-  body: JSON.stringify({message: 'Error with chatbot'}),
-};
-
+const _bodySchema = Joi.object(); // Check telegram object exists
 
 /**
  * Webhook handler for incoming Telegram messages
@@ -23,24 +14,29 @@ const error = {
  * @param {Object} context - AWS Lambda context object
  * @param {Function} callback - Callback
  */
-export default (event, context, callback) => {
-      console.log('Lambda handler loading');
-      console.log('Incoming payload: ', event.body);
+export default async (event, context, callback) => {
+  try {
+    console.log('Lambda handler loading');
+    console.log('Incoming payload: ', event.body);
+    // Validate body
+    const payload = await Joi.validate(event.body, _bodySchema);
 
-      // Send telegram a reply immediately to stop multiple messages to user.
-      callback(null, response);
+    // Class
+    const telegram = new Telegram(config);
 
-      const telegram = new Telegram(config);
-
-      // Get Lambda data
-      const payload = JSON.parse(event.body);
-      // Pass telegram message for processing
-      telegram.sendReply(payload.message)
-        .then((res) => {
-          console.log('Reply sent to user');
-        })
-        .catch((err) => {
-          console.log('Error in Telegram reply. ' + err);
-          callback(null, error);
-        });
+    // Send reply message
+    await telegram.sendReply(payload.message);
+    handleResponse(callback, 200, {});
+    console.log('Message sent');
+  } catch (err) {
+    if (err.isJoi) {
+      // tell Telegram to ingore errors, but stop process
+      handleResponse(callback, 200, {});
+      console.log('Validation error: ' + err.details[0].message);
+    } else {
+      // tell Telegram to ignore errors, but stop process
+      console.log('Error ' + err.message);
+      handleResponse(callback, 200, {});
+    }
+  }
 };
