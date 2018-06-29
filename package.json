@@ -25,7 +25,7 @@
     "url": "https://github.com/urbanriskmap/cognicity-reports-telegram-lambda/issues"
   },
   "dependencies": {
-    "@urbanriskmap/cognicity-bot-core": "1.0.2",
+    "@urbanriskmap/cognicity-bot-core": "1.0.3",
     "axios": "^0.18.0",
     "dotenv": "^6.0.0",
     "joi": "^13.4.0",
