@@ -81,4 +81,25 @@ deploy:
     handler_name: "default"
     on:
       branch: dev
+  # IN Prod Webhook
+  - provider: lambda
+    function_name: "cognicity-telegram-webhook-prod"
+    region: $AWS_REGION_IN
+    role: $AWS_LAMBDA_ROLE
+    runtime: "nodejs8.10"
+    module_name: "bin/functions/receive"
+    handler_name: "default"
+    on:
+      branch: master 
+  # IN Prod Replies
+  - provider: lambda
+    function_name: "cognicity-telegram-reply-prod"
+    region: $AWS_REGION_IN
+    role: $AWS_LAMBDA_ROLE
+    runtime: "nodejs8.10"
+    module_name: "bin/functions/send"
+    handler_name: "default"
+    on:
+      branch: master
+
 
