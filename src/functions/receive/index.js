@@ -20,13 +20,12 @@ export default async (event, context, callback) => {
     console.log('Incoming payload: ', event.body);
     // Validate body
     const payload = await Joi.validate(event.body, _bodySchema);
-
+    // Reply to Telegram directly to stop duplicate messages
+    handleResponse(callback, 200, {});
     // Class
     const telegram = new Telegram(config);
-
     // Send reply message
     await telegram.sendReply(payload.message);
-    handleResponse(callback, 200, {});
     console.log('Message sent');
   } catch (err) {
     if (err.isJoi) {

@@ -5,3 +5,8 @@
 - added experimental monitoring
 - updated npm packages
 - add catch for reports outside city
+
+### v1.0.1
+- update bot-core module
+- add India deployments
+- fix multiple replies issue
