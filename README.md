@@ -39,7 +39,7 @@ Save a copy of sample.env as .env in local directory with appropriate credential
 * `CARDS_API_KEY`: CogniCity server API key
 * `CARDS_URL`: Client address for cards
 * `DEFAULT_INSTANCE_COUNTRY_CODE`: Default country for message files (e.g. 'us')
-* `DEFAULT_LANG`: Current default language is English. You can add more languages here and parameterize replies for each language.
+* `DEFAULT_LANG`: Current default language is English. You can add more languages here and parameterize replies for each language
 * `MAP_SERVER`: Client address for map
 * `TELEGRAM_ENDPOINT`: Telegram's API
 
