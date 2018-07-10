@@ -47,15 +47,13 @@ export default class Telegram {
     * @return {String} - URI for request
   **/
   _prepareLinkResponse(userId, message) {
-    const response = this.config.TELEGRAM_ENDPOINT +
+    return (this.config.TELEGRAM_ENDPOINT +
             this.config.BOT_TOKEN +
             '/sendmessage?text=' +
             message.text +
             message.link +
             '&chat_id=' +
-            userId;
-    console.log(response);
-    return (response);
+            userId);
   }
 
     /**
@@ -84,7 +82,6 @@ export default class Telegram {
     * @return {Promise} - Result of request
   **/
   _sendMessage(requestString) {
-    console.log(requestString);
     return new Promise((resolve, reject) => {
       console.log('Sending request to telegram: ' + requestString);
       this.axios.post(requestString, {})
@@ -129,11 +126,9 @@ export default class Telegram {
         network: 'telegram',
       };
       if (this._classify(telegramMessage.text) === 'flood') {
-        console.log('this is a flood message');
         this.bot.card(properties)
         .then((msg) => {
           const response = this._prepareLinkResponse(properties.userId, msg);
-          console.log('response', response);
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
       } else {
