@@ -117,6 +117,9 @@ export default function() {
 
     it('Can get card message', function(done) {
       const message = {
+        from: {
+          language_code: 'en-US',
+        },
         chat: {
           id: 1,
         },
@@ -131,6 +134,9 @@ export default function() {
 
     it('Can handle axios error geting card message', function(done) {
       const message = {
+        from: {
+          language_code: 'en-US',
+        },
         chat: {
           id: 1,
         },
@@ -147,6 +153,9 @@ export default function() {
 
     it('Can get default messsage', function(done) {
       const message = {
+        from: {
+          language_code: 'en-US',
+        },
         chat: {
           id: 1,
         },
@@ -161,6 +170,9 @@ export default function() {
 
     it('Can catch error getting default messsage', function(done) {
       const message = {
+        from: {
+          language_code: 'en-US',
+        },
         chat: {
           id: 1,
         },
@@ -176,6 +188,9 @@ export default function() {
 
     it('Can catch error getting card messsage', function(done) {
       const message = {
+        from: {
+          language_code: 'en-US',
+        },
         chat: {
           id: 1,
         },
