@@ -13,3 +13,6 @@
 - add support for different replies by country
 
 ### v1.0.2
+- add user language detection
+- add Spanish messages for US deployments
+- create Indonesian language file
