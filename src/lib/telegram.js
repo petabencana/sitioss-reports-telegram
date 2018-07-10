@@ -129,9 +129,11 @@ export default class Telegram {
         network: 'telegram',
       };
       if (this._classify(telegramMessage.text) === 'flood') {
+        console.log('this is a flood message');
         this.bot.card(properties)
         .then((msg) => {
           const response = this._prepareLinkResponse(properties.userId, msg);
+          console.log('response', response);
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
       } else {

@@ -22,8 +22,10 @@ export default async (event, context, callback) => {
     const payload = await Joi.validate(event.body, _bodySchema);
     // Reply to Telegram directly to stop duplicate messages
     handleResponse(callback, 200, {});
+    console.log('response sent');
     // Class
     const telegram = new Telegram(config);
+    console.log('class made');
     // Send reply message
     await telegram.sendReply(payload.message);
     console.log('Message sent');
