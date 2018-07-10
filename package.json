@@ -1,6 +1,6 @@
 {
   "name": "cognicity-reports-telegram-lambda",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Telegram chatbot running on AWS lambda",
   "main": "index.js",
   "scripts": {
