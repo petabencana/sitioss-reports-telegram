@@ -122,7 +122,7 @@ export default class Telegram {
     return new Promise((resolve, reject) => {
       const properties = {
         userId: String(telegramMessage.chat.id),
-        language: this.config.DEFAULT_LANGUAGE,
+        language: telegramMessage.from.language_Code.split('-')[0],
         network: 'telegram',
       };
       if (this._classify(telegramMessage.text) === 'flood') {
