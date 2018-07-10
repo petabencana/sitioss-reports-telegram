@@ -1,16 +1,16 @@
 {
     "en": {
       "texts": {
-        "default": "[EN] RiskMap bot helps you report flooding in realtime. Send /flood to report. In life-threatening situations call 911.",
-        "card": "[EN] Please report using this one-time link ",
-        "thanks": "[EN] Thank you for your report. You can access it using this link "
+        "default": "RiskMap bot helps you report flooding in realtime. Send /flood to report. In life-threatening situations call 911.",
+        "card": "Please report using this one-time link ",
+        "thanks": "Thank you for your report. You can access it using this link "
       }
     },
-    "id": {
+    "es": {
       "texts": {
-        "default": "[ID] RiskMap bot helps you report flooding in realtime. Send /flood to report. In life-threatening situations call 911.",
-        "card": "[ID] Please report using this one-time link ",
-        "thanks": "[ID] Thank you for your report. You can access it using this link "
+        "default": "RiskMap bot lo ayuda a reportar inundaciones en tiempo real. Enviar /flood para informar. En situaciones que amenazan la vida, llame al 911.",
+        "card": "Informe usando este enlace de un solo tiempo ",
+        "thanks": "Gracias por tu informe. Puedes acceder usando este enlace "
       }
     }
   }
