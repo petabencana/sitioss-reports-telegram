@@ -1,6 +1,5 @@
 import axios from 'axios';
 import Bot from '@urbanriskmap/cognicity-bot-core';
-import messages from './messages.json';
 
 /**
  * Class for sending CogniCity messages via Telegram
@@ -15,7 +14,9 @@ export default class Telegram {
    */
   constructor(config) {
     this.config = config;
-    this.config.MESSAGES = messages;
+    this.config.MESSAGES = require('./messages-' +
+    this.config.DEFAULT_INSTANCE_COUNTRY_CODE +
+    '.json');
     this.bot = new Bot(this.config);
     this.axios = axios;
   }

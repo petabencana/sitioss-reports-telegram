@@ -1,5 +1,5 @@
 // Remove a Telegram bot webhook
-//Rune: npx babel-node commands/deleteWebhook.js
+// Run: npx babel-node commands/deleteWebhook.js
 import axios from 'axios';
 require('dotenv').config();
 import config from '../src/config';
