@@ -47,14 +47,15 @@ export default class Telegram {
     * @return {String} - URI for request
   **/
   _prepareLinkResponse(userId, message) {
-    return (this.config.TELEGRAM_ENDPOINT +
+    const response = this.config.TELEGRAM_ENDPOINT +
             this.config.BOT_TOKEN +
             '/sendmessage?text=' +
             message.text +
             message.link +
             '&chat_id=' +
-            userId
-          );
+            userId;
+    console.log(response);
+    return (response);
   }
 
     /**
