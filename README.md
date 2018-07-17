@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/urbanriskmap/cognicity-reports-telegram-lambda.svg?branch=dev)](https://travis-ci.org/urbanriskmap/cognicity-reports-telegram-lambda) [![Coverage Status](https://coveralls.io/repos/github/urbanriskmap/cognicity-reports-telegram-lambda/badge.svg?branch=master)](https://coveralls.io/github/urbanriskmap/cognicity-reports-telegram-lambda?branch=master) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) 
+[![Build Status](https://travis-ci.org/urbanriskmap/cognicity-reports-telegram-lambda.svg?branch=dev)](https://travis-ci.org/urbanriskmap/cognicity-reports-telegram-lambda) [![Coverage Status](https://coveralls.io/repos/github/urbanriskmap/cognicity-reports-telegram-lambda/badge.svg?branch=master)](https://coveralls.io/github/urbanriskmap/cognicity-reports-telegram-lambda?branch=master) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 # cognicity-reports-telegram-lambda
 
@@ -20,7 +20,7 @@ This module deploys two AWS lambda functions:
     * v8.10 or later (ES6 syntax is transpiled using Babel)
 
 ### Getting started
-* Create Telegram bot as explained [here](https://core.telegram.org/bots#creating-a-new-bot) and get `BOT_TOKEN` [here](https://core.telegram.org/bots#generating-an-authorization-token). Configure its About, Description, Commands, Profile picture but hold off on setting up Webhooks until you have configured the webhook.
+* Create Telegram bot as explained [here](https://core.telegram.org/bots#creating-a-new-bot) and get `BOT_TOKEN` [here](https://core.telegram.org/bots#generating-an-authorization-token). Configure its About, Description, Commands, Profile picture but hold off on setting up webhooks until you have configured the webhook.
 * Create two AWS API gatway endpoints for the webhook and send functions
 * Add the appropriate parameters in `src/config` and `.env`.
 * Use the `commands/setWebook` function to tell Telegram the address of the API gateway
@@ -44,5 +44,4 @@ Save a copy of sample.env as .env in local directory with appropriate credential
 * `TELEGRAM_ENDPOINT`: Telegram's API
 
 #### Misc Notes
-- Depdning on your deploymeny method you may need to add the above parameters to the Lambda functions in the AWS web console
-
+- Depending on your deployment method you may need to add the above parameters to the Lambda functions in the AWS web console
