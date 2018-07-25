@@ -120,12 +120,13 @@ export default class Telegram {
   **/
   sendReply(telegramMessage) {
     return new Promise((resolve, reject) => {
-      const properties = {
+      let properties = {
         userId: String(telegramMessage.chat.id),
         language: telegramMessage.from.language_code.split('-')[0],
         network: 'telegram',
       };
       if (this._classify(telegramMessage.text) === 'flood') {
+        properties.language = 'en'; // user speaks English
         this.bot.card(properties)
         .then((msg) => {
           const response = this._prepareLinkResponse(properties.userId, msg);
