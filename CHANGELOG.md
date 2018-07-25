@@ -16,3 +16,4 @@
 - add user language detection
 - add Spanish messages for US deployments
 - create Indonesian language file
+- update cognicity-bot-core
