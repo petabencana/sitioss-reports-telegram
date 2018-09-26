@@ -30,9 +30,12 @@ export default class Telegram {
    */
   _classify(text) {
     // filter the message by keyword
-    const re = new RegExp(/\/flood/gi);
-    if (re.exec(text) !== null) {
+    const reFlood = new RegExp(/\/flood/gi);
+    const rePrep = new RegExp(/\/disruption/gi);
+    if (reFlood.exec(text) !== null) {
       return 'flood';
+    } else if (rePrep.exec(text)) {
+      return 'prep';
     } else {
       return null;
     }
@@ -44,14 +47,19 @@ export default class Telegram {
     * @private
     * @param {String} userId - User or Telegram chat ID for reply
     * @param {Object} message - Bot message object
+    * @param {String} disasterType - one of 'prep' or 'flood'
     * @return {String} - URI for request
   **/
-  _prepareLinkResponse(userId, message) {
+  _prepareLinkResponse(userId, message, disasterType) {
+    let customLink = message.link;
+    if (disasterType === 'prep') {
+      customLink = message.prepLink;
+    }
     return (this.config.TELEGRAM_ENDPOINT +
             this.config.BOT_TOKEN +
             '/sendmessage?text=' +
             message.text +
-            message.link +
+            customLink +
             '&chat_id=' +
             userId);
   }
@@ -105,7 +113,8 @@ export default class Telegram {
       }
       this.bot.thanks(body)
         .then((msg) => {
-          const response = this._prepareLinkResponse(body.userId, msg);
+          const response =
+              this._prepareLinkResponse(body.userId, msg, 'flood');
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
     });
@@ -126,10 +135,21 @@ export default class Telegram {
         network: 'telegram',
       };
       if (this._classify(telegramMessage.text) === 'flood') {
+        // user requested flood card
         properties.language = 'en'; // user speaks English
         this.bot.card(properties)
         .then((msg) => {
-          const response = this._prepareLinkResponse(properties.userId, msg);
+          const response = this.
+            _prepareLinkResponse(properties.userId, msg, 'flood');
+          resolve(this._sendMessage(response));
+        }).catch((err) => reject(err));
+      } else if (this._classify(telegramMessage.text) === 'prep') {
+        // user requested prep card
+        properties.language = 'en'; // user speaks English
+        this.bot.card(properties)
+        .then((msg) => {
+          const response = this.
+              _prepareLinkResponse(properties.userId, msg, 'prep');
           resolve(this._sendMessage(response));
         }).catch((err) => reject(err));
       } else {

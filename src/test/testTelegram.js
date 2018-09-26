@@ -38,7 +38,11 @@ export default function() {
       const mockCard = function(properties) {
         return new Promise((resolve, reject) => {
           if (botError === false) {
-            resolve({text: 'mocked card message', link: ' card'});
+            resolve({
+              text: 'mocked card message',
+              link: ' card',
+              prepLink: ' prepLink',
+            });
           } else {
             reject(new Error(`bot error`));
           }
@@ -132,6 +136,23 @@ export default function() {
         });
     });
 
+    it('Can get prep messsage', function(done) {
+      const message = {
+        from: {
+          language_code: 'en-US',
+        },
+        chat: {
+          id: 1,
+        },
+        text: '/disruption',
+      };
+      telegram.sendReply(message)
+        .then((res) => {
+          test.value(res).is('https://api.telegram.org/bot' + config.BOT_TOKEN + '/sendmessage?text=mocked card message prepLink&chat_id=1');
+          done();
+        });
+    });
+
     it('Can handle axios error geting card message', function(done) {
       const message = {
         from: {
@@ -167,6 +188,7 @@ export default function() {
           done();
         });
     });
+
 
     it('Can catch error getting default messsage', function(done) {
       const message = {

@@ -1,7 +1,7 @@
 {
   "en": {
     "texts": {
-      "default": "RiskMap bot helps you report flooding in realtime. Send /flood to report. In life-threatening situations contact emergency services.",
+      "default": "RiskMap bot helps you report flooding in realtime. Send /flood to report flooding. Send /disruption to report infrastructure failure. In life-threatening situations contact emergency services.",
       "card": "Please report using this one-time link ",
       "thanks": "Thank you for your report. You can access it using this link "
     }
