@@ -36,8 +36,10 @@ Save a copy of sample.env as .env in local directory with appropriate credential
 * `API_GW_WEBHOOK`: The API gateway address for Telegram to trigger the webhook function
 * `BOT_TOKEN`: Access token created on creating a Telegram bot
 * `CARDS_API`: CogniCity server endpoint to get unique report card links
+* `CARDS_DECK`: Array of [flood,prep] for what decks should be deployed
 * `CARDS_API_KEY`: CogniCity server API key
 * `CARDS_URL`: Client address for cards
+* `PREP_URL`: Client address for prep cards
 * `DEFAULT_INSTANCE_COUNTRY_CODE`: Default country for message files (e.g. 'us')
 * `DEFAULT_LANGUAGE`: Current default language is English. You can add more languages here and parameterize replies for each language
 * `MAP_SERVER`: Client address for map

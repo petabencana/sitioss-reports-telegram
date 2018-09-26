@@ -17,3 +17,7 @@
 - add Spanish messages for US deployments
 - create Indonesian language file
 - update cognicity-bot-core
+
+### v1.1.0
+- add prep cards
+- update bot-core to v1.1.3
