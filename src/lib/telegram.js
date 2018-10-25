@@ -30,7 +30,7 @@ export default class Telegram {
    */
   _classify(text) {
     // filter the message by keyword
-    const reFlood = new RegExp(/\/flood/gi);
+    const reFlood = new RegExp(/(\/flood|\/banjir)/gi);
     const rePrep = new RegExp(/\/disruption/gi);
     if (reFlood.exec(text) !== null) {
       return 'flood';
@@ -137,6 +137,15 @@ export default class Telegram {
       if (this._classify(telegramMessage.text) === 'flood') {
         // user requested flood card
         properties.language = 'en'; // user speaks English
+        this.bot.card(properties)
+        .then((msg) => {
+          const response = this.
+            _prepareLinkResponse(properties.userId, msg, 'flood');
+          resolve(this._sendMessage(response));
+        }).catch((err) => reject(err));
+      } else if (this._classify(telegramMessage.text) === 'banjir') {
+        // user requested flood card
+        properties.language = 'id'; // user speaks Bahasa Indonesia
         this.bot.card(properties)
         .then((msg) => {
           const response = this.
