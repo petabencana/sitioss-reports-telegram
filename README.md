@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/urbanriskmap/cognicity-reports-telegram.svg?branch=dev)](https://travis-ci.org/urbanriskmap/cognicity-reports-telegram) [![Coverage Status](https://coveralls.io/repos/github/urbanriskmap/cognicity-reports-telegram/badge.svg?branch=master)](https://coveralls.io/github/urbanriskmap/cognicity-reports-telegram?branch=master) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) 
 
-# cognicity-reports-telegram
+# sitioss-reports-telegram
 
 ## Telegram Bot
 Allows Telegram users to submit flood reports via text message chat bot.
