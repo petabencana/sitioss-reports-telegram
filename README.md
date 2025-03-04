@@ -1,10 +1,8 @@
-[![Build Status](https://travis-ci.org/urbanriskmap/cognicity-reports-telegram.svg?branch=dev)](https://travis-ci.org/urbanriskmap/cognicity-reports-telegram) [![Coverage Status](https://coveralls.io/repos/github/urbanriskmap/cognicity-reports-telegram/badge.svg?branch=master)](https://coveralls.io/github/urbanriskmap/cognicity-reports-telegram?branch=master) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) 
 
 # sitioss-reports-telegram
 
 ## Telegram Bot
 Allows Telegram users to submit flood reports via text message chat bot.
-Part of the CogniCity platform, deployed for [Urban Risk Map](https://riskmap.us).
 
 This module deploys two AWS lambda functions:
 1. A webhook for incoming messages from Telegram
@@ -12,12 +10,6 @@ This module deploys two AWS lambda functions:
 
 ### Install
 `npm install`
-
-### Requirements
-- CogniCity:
-    * This function is designed to work with Cognicity Server v3.0.6 or later, running CogniCity Schema v3.0.7 or later.
-- Node:
-    * v8.10 or later (ES6 syntax is transpiled using Babel)
 
 ### Getting started
 * Create Telegram bot as explained [here](https://core.telegram.org/bots#creating-a-new-bot) and get `BOT_TOKEN` [here](https://core.telegram.org/bots#generating-an-authorization-token). Configure its About, Description, Commands, Profile picture but hold off on setting up webhooks until you have configured the webhook.
